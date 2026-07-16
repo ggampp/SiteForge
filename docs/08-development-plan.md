@@ -28,32 +28,31 @@
 - [x] Schema Zod (`ExtractionResult`, `ElementNode`, …)  
 - [x] DOM walk + computed styles subset (30+ props)  
 - [x] Viewport + full-page screenshot  
-- [x] Metadata (description/lang) — raw HTML option still TBD  
+- [x] Metadata (description/lang) + raw HTML (`raw.html`)  
 - [x] Lazy scroll helper  
 - [x] Persist store `.siteforge/sources/{id}`  
-- [x] CLI `extract` (MVP)  
+- [x] CLI `extract` (MVP) + timeouts / INVALID_URL  
 - [x] Fixture tests com HTML local (não rede flaky)  
-
-
 
 **Exit:** extract de 3 páginas estáticas locais + 2 URLs públicas de benchmark.
 
 ### Phase 2 — Chunk + assets (2–3 semanas)
 
-- [ ] Three principles chunker  
-- [ ] `list_sections` / `get_section`  
-- [ ] Asset discover + download batch (concurrency 4)  
-- [ ] Manifest paths  
-- [ ] CLI `chunk`, `download`  
+- [x] Three principles chunker  
+- [x] `list_sections` / `get_section`  
+- [x] Asset discover + download batch (concurrency 4)  
+- [x] Manifest paths + path-escape guard  
+- [x] CLI `chunk`, `sections`, `section`, `download`, `query`, `meta`  
 
 **Exit:** section set validado (no overlap, coverage) em fixtures.
 
 ### Phase 3 — MCP P0 (2–3 semanas)
 
-- [ ] MCP server stdio (SDK oficial)  
-- [ ] Tools P0 wired to core  
-- [ ] Truncation + path returns  
-- [ ] Error codes  
+- [x] MCP server stdio (SDK oficial) — tools Phase 1–2 wired  
+- [x] Tools P0 core wired (extract, sections, assets, query, doctor)  
+- [x] Truncation + path returns (get_section large)  
+- [x] Error codes estruturados  
+
 - [ ] Manual verify Claude Code + Cursor + Grok  
 - [ ] Publish `@siteforge/mcp` (private first ok)  
 

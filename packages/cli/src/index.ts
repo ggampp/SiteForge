@@ -4,9 +4,24 @@ import {
   listSourceIds,
   runDoctor,
   errResult,
+  toErrorShape,
+  SiteForgeException,
+  assertHttpUrl,
+  chunkSource,
+  getSectionsList,
+  getSectionDetail,
+  discoverSourceAssets,
+  downloadSourceAssets,
+  querySource,
+  getPageMetadata,
 } from "@siteforge/core";
 
 const VERSION = "0.1.0";
+
+function printError(err: unknown): never {
+  console.error(JSON.stringify(toErrorShape(err), null, 2));
+  process.exit(1);
+}
 
 const doctor = defineCommand({
   meta: {
@@ -53,6 +68,11 @@ const extract = defineCommand({
       description: "Extra wait after load (ms)",
       default: "2000",
     },
+    timeout: {
+      type: "string",
+      description: "Navigation timeout (ms)",
+      default: "60000",
+    },
     "no-scroll": {
       type: "boolean",
       description: "Disable lazy scroll before extract",
@@ -68,31 +88,31 @@ const extract = defineCommand({
       description: "Skip computed style capture",
       default: false,
     },
+    "no-raw-html": {
+      type: "boolean",
+      description: "Skip saving raw.html",
+      default: false,
+    },
   },
   async run({ args }) {
-    const url = String(args.url);
-    if (!/^https?:\/\//i.test(url)) {
-      console.error(
-        JSON.stringify(
-          errResult("INVALID_URL", "URL must start with http:// or https://", "Example: siteforge extract https://example.com"),
-          null,
-          2,
-        ),
-      );
-      process.exitCode = 1;
-      return;
+    try {
+      const url = String(args.url);
+      assertHttpUrl(url);
+      console.error(`Extracting ${url} …`);
+      const result = await extractPage({
+        url,
+        outDir: String(args.out),
+        waitMs: Number(args.wait) || 0,
+        timeoutMs: Number(args.timeout) || 60_000,
+        lazyScroll: !args["no-scroll"],
+        screenshots: !args["no-screenshots"],
+        captureStyles: !args["no-styles"],
+        saveRawHtml: !args["no-raw-html"],
+      });
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      printError(err);
     }
-
-    console.error(`Extracting ${url} …`);
-    const result = await extractPage({
-      url,
-      outDir: String(args.out),
-      waitMs: Number(args.wait) || 0,
-      lazyScroll: !args["no-scroll"],
-      screenshots: !args["no-screenshots"],
-      captureStyles: !args["no-styles"],
-    });
-    console.log(JSON.stringify(result, null, 2));
   },
 });
 
@@ -115,6 +135,199 @@ const list = defineCommand({
   },
 });
 
+const chunk = defineCommand({
+  meta: {
+    name: "chunk",
+    description: "Chunk a source into sections (three principles)",
+  },
+  args: {
+    sourceId: {
+      type: "positional",
+      description: "Source id",
+      required: true,
+    },
+    out: {
+      type: "string",
+      default: ".siteforge",
+      alias: "o",
+    },
+    "max-tokens": {
+      type: "string",
+      default: "10000",
+    },
+  },
+  async run({ args }) {
+    try {
+      const result = await chunkSource(String(args.out), String(args.sourceId), {
+        maxTokens: Number(args["max-tokens"]) || 10_000,
+      });
+      console.log(
+        JSON.stringify(
+          {
+            ok: true,
+            sourceId: args.sourceId,
+            pageHeight: result.pageHeight,
+            validation: result.validation,
+            indexPath: result.indexPath,
+            sections: result.summaries,
+          },
+          null,
+          2,
+        ),
+      );
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
+const sections = defineCommand({
+  meta: {
+    name: "sections",
+    description: "List sections for a source (chunks if needed)",
+  },
+  args: {
+    sourceId: {
+      type: "positional",
+      required: true,
+    },
+    out: {
+      type: "string",
+      default: ".siteforge",
+      alias: "o",
+    },
+  },
+  async run({ args }) {
+    try {
+      const result = await getSectionsList(
+        String(args.out),
+        String(args.sourceId),
+      );
+      console.log(JSON.stringify({ ok: true, ...result }, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
+const section = defineCommand({
+  meta: {
+    name: "section",
+    description: "Get one section detail JSON",
+  },
+  args: {
+    sourceId: { type: "positional", required: true },
+    sectionId: { type: "positional", required: true },
+    out: { type: "string", default: ".siteforge", alias: "o" },
+  },
+  async run({ args }) {
+    try {
+      const detail = await getSectionDetail(
+        String(args.out),
+        String(args.sourceId),
+        String(args.sectionId),
+      );
+      console.log(JSON.stringify({ ok: true, section: detail }, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
+const download = defineCommand({
+  meta: {
+    name: "download",
+    description: "Discover and download assets for a source",
+  },
+  args: {
+    sourceId: { type: "positional", required: true },
+    out: { type: "string", default: ".siteforge", alias: "o" },
+    target: {
+      type: "string",
+      description: "Target directory (default: source assets/)",
+      alias: "t",
+    },
+  },
+  async run({ args }) {
+    try {
+      const discovered = await discoverSourceAssets(
+        String(args.out),
+        String(args.sourceId),
+      );
+      const result = await downloadSourceAssets(
+        String(args.out),
+        String(args.sourceId),
+        {
+          targetDir: args.target ? String(args.target) : undefined,
+        },
+      );
+      console.log(
+        JSON.stringify(
+          {
+            ok: true,
+            discovered: discovered.count,
+            downloaded: result.downloaded.length,
+            failed: result.failed.length,
+            manifestPath: result.manifestPath,
+            downloadedFiles: result.downloaded,
+            failedFiles: result.failed,
+          },
+          null,
+          2,
+        ),
+      );
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
+const query = defineCommand({
+  meta: {
+    name: "query",
+    description: "Query extraction JSON with dotted path",
+  },
+  args: {
+    sourceId: { type: "positional", required: true },
+    path: { type: "positional", required: true },
+    out: { type: "string", default: ".siteforge", alias: "o" },
+  },
+  async run({ args }) {
+    try {
+      const result = await querySource(
+        String(args.out),
+        String(args.sourceId),
+        String(args.path),
+      );
+      console.log(JSON.stringify({ ok: true, ...result }, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
+const meta = defineCommand({
+  meta: {
+    name: "meta",
+    description: "Show page metadata for a source",
+  },
+  args: {
+    sourceId: { type: "positional", required: true },
+    out: { type: "string", default: ".siteforge", alias: "o" },
+  },
+  async run({ args }) {
+    try {
+      const result = await getPageMetadata(
+        String(args.out),
+        String(args.sourceId),
+      );
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
 const main = defineCommand({
   meta: {
     name: "siteforge",
@@ -126,6 +339,12 @@ const main = defineCommand({
     doctor,
     extract,
     list,
+    chunk,
+    sections,
+    section,
+    download,
+    query,
+    meta,
   },
 });
 
@@ -133,4 +352,4 @@ export async function runMain(): Promise<void> {
   await cittyRunMain(main);
 }
 
-export { main };
+export { main, SiteForgeException, errResult };

@@ -92,6 +92,11 @@ export const SourceMetaSchema = z.object({
     meta: z.string(),
     extraction: z.string(),
     screenshotsDir: z.string().optional(),
+    rawHtml: z.string().optional(),
+    sectionsDir: z.string().optional(),
+    sectionsIndex: z.string().optional(),
+    assetsManifest: z.string().optional(),
+    assetsDir: z.string().optional(),
   }),
 });
 export type SourceMeta = z.infer<typeof SourceMetaSchema>;

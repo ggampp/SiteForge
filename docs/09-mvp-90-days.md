@@ -22,21 +22,24 @@ Premissa: **1 desenvolvedor sênior**, ~4–5 dias úteis/semana, foco T1.
 
 | Entrega | Aceite | Status |
 |---------|--------|--------|
-| DOM tree + computed styles | fixture test + 30+ props list | Done (subset) |
+| DOM tree + computed styles | fixture test + 30+ props list | Done |
 | Screenshots viewport+full | files exist | Done |
 | Source store | sourceId roundtrip | Done |
 | CLI `siteforge extract` | command works | Done |
 | Lazy scroll | steps in stats | Done |
-| 2 public URLs smoke (manual) | checklist filled | Partial (`example.com`) |
+| raw.html + timeouts/INVALID_URL | tests + CLI | Done |
+| 2 public URLs smoke | checklist | Done (`example.com`, `httpbin.org/html`) |
 
 ### Semanas 6–7 — Chunk + assets
 
-| Entrega | Aceite |
-|---------|--------|
-| Chunker 3 principles | validation function tests |
-| Section JSON files | list_sections ≥ 1 |
-| Download assets batch | files under public/ |
-| Manifest | urls→paths |
+| Entrega | Aceite | Status |
+|---------|--------|--------|
+| Chunker 3 principles | validation function tests | Done |
+| Section JSON files | list_sections ≥ 1 | Done |
+| Download assets batch | concurrency 4 + partial fail OK | Done |
+| Manifest | urls→paths | Done |
+| CLI chunk/download/query | commands work | Done |
+
 
 ### Semanas 8–9 — MCP
 

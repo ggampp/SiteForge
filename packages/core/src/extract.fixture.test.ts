@@ -50,9 +50,11 @@ describe("extractPage with local HTML fixture", () => {
         expect(summary.stats.totalElements).toBeGreaterThan(2);
         expect(summary.paths.viewportScreenshot).toBeTruthy();
         expect(summary.paths.fullPageScreenshot).toBeTruthy();
+        expect(summary.paths.rawHtml).toBeTruthy();
 
         await access(summary.paths.viewportScreenshot!);
         await access(summary.paths.fullPageScreenshot!);
+        await access(summary.paths.rawHtml!);
 
         const full = await loadExtraction(outDir, summary.sourceId);
         expect(full.root.tag).toBe("body");

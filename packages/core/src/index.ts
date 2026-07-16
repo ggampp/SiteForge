@@ -6,3 +6,8 @@ export * from "./doctor.js";
 export * from "./styles.js";
 export * from "./scroll.js";
 export * from "./screenshots.js";
+export * from "./errors.js";
+export * from "./chunk.js";
+export * from "./assets.js";
+export * from "./query.js";
+export * from "./pipeline.js";

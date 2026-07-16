@@ -71,9 +71,10 @@ Store layout: `.siteforge/sources/{sourceId}/` (gitignored).
 | Research / docs | Done |
 | Name availability | Checked — see [docs/name-availability.md](docs/name-availability.md) |
 | Monorepo bootstrap (Phase 0) | Done |
-| Core extract (styles 30+, screenshots, lazy scroll, store) | Done (MVP) |
-| Phase 1 remaining (raw HTML option polish) | Partial |
-| GitHub repo `ggampp/SiteForge` + SSH remote | Done (push pending confirmation) |
+| Core extract (styles, screenshots, scroll, raw.html, timeouts) | Done |
+| Phase 2 chunk + assets + CLI/MCP tools | Done |
+| GitHub repo `ggampp/SiteForge` | Done (pushed) |
+| Skill polish + Next template | Pending |
 | npm publish | Pending |
 
 ---

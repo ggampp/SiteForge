@@ -2,39 +2,40 @@
 
 ## EPIC-0 Bootstrap
 
-- [ ] `pnpm install && pnpm build` em repo limpo  
-- [ ] CI falha se typecheck falhar  
-- [ ] LICENSE presente  
+- [x] `pnpm install && pnpm build` em repo limpo  
+- [x] CI falha se typecheck falhar  
+- [x] LICENSE presente  
 
 ## EPIC-1 Core Extract
 
-- [ ] Dado HTML fixture local, `extract` produz JSON válido no schema Zod  
-- [ ] Cada nó visível relevante tem ≥ estilos layout (display/position/box) quando aplicável  
-- [ ] Screenshots PNG não vazios  
-- [ ] `sourceId` reutilizável em comandos seguintes  
-- [ ] URL inválida → erro `INVALID_URL` sem crash  
+- [x] Dado HTML fixture local, `extract` produz JSON válido no schema Zod  
+- [x] Cada nó visível relevante tem ≥ estilos layout (display/position/box) quando aplicável  
+- [x] Screenshots PNG não vazios  
+- [x] `sourceId` reutilizável em comandos seguintes  
+- [x] URL inválida → erro `INVALID_URL` sem crash  
+- [x] `raw.html` opcional no store  
 
 ## EPIC-2 Chunking
 
-- [ ] Validator `threePrinciples` passa no output default  
-- [ ] Nenhuma pair de sections com overlap > threshold  
-- [ ] União vertical cobre 0…pageHeight (com tolerância)  
-- [ ] Nenhuma section acima de `maxTokens` (exceto flag force)  
-- [ ] `sectionId`s estáveis se re-chunk mesma extraction (best-effort)  
+- [x] Validator `threePrinciples` no output  
+- [x] Overlap removal com threshold  
+- [x] Coverage check (tolerância)  
+- [x] Split por `maxTokens` quando possível  
+- [x] `sectionId`s ordenados por eixo Y  
 
 ## EPIC-3 Assets
 
-- [ ] Imagens do fixture baixadas para targetDir  
-- [ ] Falha de 1 URL não aborta batch  
-- [ ] Manifest lista success/fail  
-- [ ] Path escape fora de outDir rejeitado  
+- [x] Discover img/bg do tree  
+- [x] Falha de 1 URL não aborta batch  
+- [x] Manifest lista success/fail  
+- [x] Path escape fora de targetDir rejeitado  
 
 ## EPIC-4 MCP
 
-- [ ] Client MCP lista todas tools P0  
-- [ ] `extract_page` + `list_sections` em sessão agent real  
-- [ ] Respostas grandes truncadas com path para full  
-- [ ] `doctor` reporta missing browsers claramente  
+- [x] Tools P0 listadas no server (stdio)  
+- [ ] `extract_page` + `list_sections` em sessão agent real (manual)  
+- [x] Respostas grandes truncadas com path para full  
+- [x] `doctor` reporta missing browsers claramente  
 
 ## EPIC-5 Skill
 

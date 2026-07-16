@@ -11,6 +11,7 @@ import { createSourceId, persistExtraction, sourceDir } from "./store.js";
 import { COMPUTED_STYLE_PROPS } from "./styles.js";
 import { lazyScrollPage } from "./scroll.js";
 import { captureScreenshots } from "./screenshots.js";
+import { SiteForgeException, assertHttpUrl } from "./errors.js";
 
 export interface ExtractOptions {
   url?: string;
@@ -19,6 +20,8 @@ export interface ExtractOptions {
   outDir?: string;
   viewport?: Viewport;
   waitMs?: number;
+  /** Navigation timeout for page.goto (ms) */
+  timeoutMs?: number;
   maxDepth?: number;
   headless?: boolean;
   /** Capture computed styles on each node (default true) */
@@ -28,6 +31,8 @@ export interface ExtractOptions {
   lazyScrollMaxSteps?: number;
   /** Viewport + full-page PNG (default true) */
   screenshots?: boolean;
+  /** Persist page.content() as raw.html (default true) */
+  saveRawHtml?: boolean;
 }
 
 export interface ExtractSummary {
@@ -41,6 +46,7 @@ export interface ExtractSummary {
     screenshotsDir?: string;
     viewportScreenshot?: string;
     fullPageScreenshot?: string;
+    rawHtml?: string;
   };
   stats: ExtractionResult["stats"] & {
     scrollSteps?: number;
@@ -57,13 +63,21 @@ export async function extractPage(
   const outDir = options.outDir ?? ".siteforge";
   const maxDepth = options.maxDepth ?? 30;
   const waitMs = options.waitMs ?? 500;
+  const timeoutMs = options.timeoutMs ?? 60_000;
   const captureStyles = options.captureStyles ?? true;
   const doScreenshots = options.screenshots ?? true;
+  const saveRawHtml = options.saveRawHtml ?? true;
   const doLazyScroll =
     options.lazyScroll ?? (options.url !== undefined && !options.html);
 
   if (!options.url && !options.html) {
-    throw new Error("extractPage requires url or html");
+    throw new SiteForgeException(
+      "EXTRACT_FAILED",
+      "extractPage requires url or html",
+    );
+  }
+  if (options.url) {
+    assertHttpUrl(options.url);
   }
 
   const manager = new BrowserManager({
@@ -78,10 +92,25 @@ export async function extractPage(
     if (options.html) {
       await gotoFixtureHtml(page, options.html);
     } else if (options.url) {
-      await page.goto(options.url, {
-        waitUntil: "domcontentloaded",
-        timeout: 60_000,
-      });
+      try {
+        await page.goto(options.url, {
+          waitUntil: "domcontentloaded",
+          timeout: timeoutMs,
+        });
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        if (/timeout/i.test(message)) {
+          throw new SiteForgeException(
+            "TIMEOUT",
+            `Navigation timed out after ${timeoutMs}ms: ${options.url}`,
+            "Increase --timeout or check the network/target",
+          );
+        }
+        throw new SiteForgeException(
+          "EXTRACT_FAILED",
+          `Failed to load ${options.url}: ${message}`,
+        );
+      }
     }
 
     if (waitMs > 0) {
@@ -111,13 +140,18 @@ export async function extractPage(
       .getAttribute("lang")
       .catch(() => null);
 
+    const rawHtml = saveRawHtml ? await page.content() : undefined;
+
     const sourceId = createSourceId();
     const { root, totalElements, maxDepthReached } = await walkDom(page, {
       maxDepth,
       captureStyles,
     });
 
-    const screenshotsDir = path.join(sourceDir(outDir, sourceId), "screenshots");
+    const screenshotsDir = path.join(
+      sourceDir(outDir, sourceId),
+      "screenshots",
+    );
     let screenshotPaths: { viewport?: string; fullPage?: string } = {};
     if (doScreenshots) {
       screenshotPaths = await captureScreenshots(page, {
@@ -159,6 +193,7 @@ export async function extractPage(
       title,
       viewport,
       result,
+      rawHtml,
     });
 
     await context.close();
@@ -205,8 +240,6 @@ async function walkDom(
         const cs = window.getComputedStyle(el);
         const out: Record<string, string> = {};
         for (const prop of props) {
-          // CSSStyleDeclaration supports camelCase via getPropertyValue needs kebab;
-          // indexing by camelCase works in browsers for computed style.
           const value = (cs as unknown as Record<string, string>)[prop] ?? "";
           if (value !== "") out[prop] = value;
         }
