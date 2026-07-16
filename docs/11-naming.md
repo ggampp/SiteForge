@@ -51,6 +51,7 @@ Detalhes: [name-availability.md](name-availability.md) (2026-07-15).
 
 - [x] `npm search siteforge` — unscoped **taken**; scope `@siteforge/*` **free**  
 - [x] `pypi` taken (N/A se TS-only)  
-- [x] GitHub `ggampp/siteforge` / `SiteForge` **available** (ainda não criado)  
+- [x] GitHub `ggampp/SiteForge` **criado** (public) — remote SSH pessoal configurado  
+
 - [ ] Domínio opcional `siteforge.dev`  
 

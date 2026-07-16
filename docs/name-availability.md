@@ -27,5 +27,6 @@
 - [x] `npm view @siteforge/core` — free  
 - [x] PyPI — taken (ignore for TS)  
 - [x] GitHub user namespace free  
-- [ ] Create GitHub repo (manual / when pushing)  
+- [x] Create GitHub repo `ggampp/SiteForge` (public) — remote `git@github-pessoal:ggampp/SiteForge.git`  
+- [ ] Push initial commit (awaiting explicit confirmation)  
 - [ ] Create npm org `@siteforge` before publish  

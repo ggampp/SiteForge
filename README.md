@@ -73,7 +73,8 @@ Store layout: `.siteforge/sources/{sourceId}/` (gitignored).
 | Monorepo bootstrap (Phase 0) | Done |
 | Core extract (styles 30+, screenshots, lazy scroll, store) | Done (MVP) |
 | Phase 1 remaining (raw HTML option polish) | Partial |
-| GitHub remote / npm publish | Pending |
+| GitHub repo `ggampp/SiteForge` + SSH remote | Done (push pending confirmation) |
+| npm publish | Pending |
 
 ---
 
