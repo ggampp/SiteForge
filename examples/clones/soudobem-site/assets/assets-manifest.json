@@ -1,0 +1,49 @@
+{
+  "sourceId": "src_mrmt0l4c_27f01b4a",
+  "targetDir": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets",
+  "createdAt": "2026-07-16T01:04:35.312Z",
+  "assets": [
+    {
+      "url": "https://soudobemsite.testecliente.com.br/__l5e/assets-v1/8b0967ee-959a-47ad-827e-6308b3d74cee/sou-do-bem-logo.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\000_sou-do-bem-logo.png",
+      "bytes": 102386,
+      "ok": true
+    },
+    {
+      "url": "https://soudobemsite.testecliente.com.br/assets/hero-people-DlOEU_ep.jpg",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\001_hero-people-DlOEU_ep.jpg",
+      "bytes": 145168,
+      "ok": true
+    },
+    {
+      "url": "https://soudobemsite.testecliente.com.br/assets/problem-family-gmo9LLz3.jpg",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\002_problem-family-gmo9LLz3.jpg",
+      "bytes": 75710,
+      "ok": true
+    },
+    {
+      "url": "https://soudobemsite.testecliente.com.br/assets/phone-score-Cj86T5hG.jpg",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\003_phone-score-Cj86T5hG.jpg",
+      "bytes": 95401,
+      "ok": true
+    },
+    {
+      "url": "https://soudobemsite.testecliente.com.br/assets/fund-family-Cowfdw67.jpg",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\004_fund-family-Cowfdw67.jpg",
+      "bytes": 118575,
+      "ok": true
+    },
+    {
+      "url": "https://soudobemsite.testecliente.com.br/assets/mediation-GhnvRA2p.jpg",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\005_mediation-GhnvRA2p.jpg",
+      "bytes": 75424,
+      "ok": true
+    }
+  ]
+}

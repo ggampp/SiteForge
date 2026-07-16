@@ -33,6 +33,14 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Large media from extracts (keep manifests if needed)
-**/screenshots/**/*.png
-!**/fixtures/**/*.png
+# Large media from local extract store only
+.siteforge/**/screenshots/**/*.png
+
+# Next builds
+**/.next/
+
+# Gallery public clones are generated — keep source under examples/clones
+examples/gallery/public/clones/
+
+# Allow reference screenshots inside published example clones
+!examples/clones/**/_reference/**/*.png

@@ -22,6 +22,8 @@ import {
   querySource,
   getPageMetadata,
   loadRawHtml,
+  rebuildSource,
+  visualDiff,
 } from "@siteforge/core";
 
 const server = new Server(
@@ -169,6 +171,35 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         required: ["sourceId"],
       },
     },
+    {
+      name: "rebuild_source",
+      description: "Rebuild source to static HTML folder (raw.html + assets)",
+      inputSchema: {
+        type: "object",
+        properties: {
+          sourceId: { type: "string" },
+          targetDir: { type: "string" },
+          siteSlug: { type: "string" },
+          outDir: { type: "string", default: ".siteforge" },
+          preferRawHtml: { type: "boolean", default: true },
+        },
+        required: ["sourceId", "targetDir", "siteSlug"],
+      },
+    },
+    {
+      name: "visual_diff",
+      description: "Pixelmatch two PNG screenshots; optional diff.png outDir",
+      inputSchema: {
+        type: "object",
+        properties: {
+          a: { type: "string" },
+          b: { type: "string" },
+          outDir: { type: "string" },
+          threshold: { type: "number" },
+        },
+        required: ["a", "b"],
+      },
+    },
   ],
 }));
 
@@ -299,6 +330,27 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         indexPath: result.indexPath,
         sections: result.summaries,
       });
+    }
+
+    if (name === "rebuild_source") {
+      const result = await rebuildSource({
+        outDir,
+        sourceId: String(args.sourceId ?? ""),
+        targetDir: String(args.targetDir ?? ""),
+        siteSlug: String(args.siteSlug ?? "rebuild"),
+        preferRawHtml: args.preferRawHtml !== false,
+      });
+      return textResult(result);
+    }
+
+    if (name === "visual_diff") {
+      const result = await visualDiff({
+        a: String(args.a ?? ""),
+        b: String(args.b ?? ""),
+        outDir: args.outDir ? String(args.outDir) : undefined,
+        threshold: typeof args.threshold === "number" ? args.threshold : undefined,
+      });
+      return textResult(result);
     }
 
     return textResult(

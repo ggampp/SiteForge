@@ -1,0 +1,52 @@
+{
+  "sourceId": "src_mrmt2atu_1bb21970",
+  "pageHeight": 6284.265625,
+  "validation": {
+    "ok": false,
+    "mutualExclusivity": true,
+    "completeCoverage": true,
+    "sizeControl": false,
+    "issues": [
+      "section_001 exceeds maxTokens (28633 > 10000)",
+      "section_002 exceeds maxTokens (102606 > 10000)"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "section_001",
+      "selector": "header",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 49
+      },
+      "estimatedTokens": 28633,
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmt2atu_1bb21970\\sections\\section_001.json"
+    },
+    {
+      "sectionId": "section_002",
+      "selector": "nav.sidebar.menu-block",
+      "rect": {
+        "x": 0,
+        "y": 49,
+        "width": 360,
+        "height": 851
+      },
+      "estimatedTokens": 102606,
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmt2atu_1bb21970\\sections\\section_002.json"
+    },
+    {
+      "sectionId": "section_003",
+      "selector": "div.siteforge-split",
+      "rect": {
+        "x": 380,
+        "y": 804,
+        "width": 1040,
+        "height": 5460.265625
+      },
+      "estimatedTokens": 1941,
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmt2atu_1bb21970\\sections\\section_003.json"
+    }
+  ]
+}

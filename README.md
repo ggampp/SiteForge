@@ -2,39 +2,52 @@
 
 **Extract. Spec. Rebuild — for AI coding agents.**
 
-SiteForge is an open-source toolkit that reverse-engineers websites into clean modern code (Next.js + shadcn/ui by default) for **coding agents** (Claude Code, Grok, Cursor, Codex, etc.).
+Open-source toolkit that reverse-engineers websites into structured data and rebuildable code for coding agents (Claude Code, Grok, Cursor, Codex, …).
 
 | Layer | Role |
 |-------|------|
-| **Extractor** | Playwright: DOM + computed styles + CSS + assets + theme + interactions |
-| **MCP** | Portable deterministic tools (`extract_page`, `list_sections`, `query_source`, …) |
-| **Skill** | Pixel-faithful clone playbook (recon → foundation → specs → builders → QA) |
-| **Template** | Optional scaffold Next 16 + Tailwind v4 + shadcn |
+| **@siteforge/core** | Playwright extract, styles, chunk (3 principles), assets, rebuild, visual diff |
+| **@siteforge/cli** | `siteforge` binary |
+| **@siteforge/mcp** | MCP stdio tools for agents |
+| **@siteforge/skill** | Portable skill playbook + sync script |
+| **templates/next-shadcn** | Next + Tailwind scaffold |
+| **examples/clones** | Working static rebuilds of demo sites |
 
 ---
 
-## Quick start (dev monorepo)
+## Quick start
 
 ```bash
 pnpm install
-pnpm exec playwright install chromium
+pnpm --filter @siteforge/core exec playwright install chromium
 pnpm build
 pnpm test
+
 pnpm --filter @siteforge/cli exec siteforge doctor
-# optional smoke:
-# pnpm --filter @siteforge/cli exec siteforge extract https://example.com
+pnpm --filter @siteforge/cli exec siteforge extract https://example.com
+pnpm --filter @siteforge/cli exec siteforge chunk <sourceId>
+pnpm --filter @siteforge/cli exec siteforge rebuild <sourceId> -t examples/clones/demo --slug demo
 ```
 
-Packages:
+### CLI commands
 
-| Package | Description |
-|---------|-------------|
-| `@siteforge/core` | Schema, browser, extract, store, doctor |
-| `@siteforge/cli` | `siteforge` binary |
-| `@siteforge/mcp` | MCP stdio server (doctor, extract_page, list_sources) |
-| `@siteforge/skill` | SKILL.md source |
+`doctor` · `extract` · `list` · `chunk` · `sections` · `section` · `download` · `query` · `meta` · `rebuild` · `diff`
 
-Store layout: `.siteforge/sources/{sourceId}/` (gitignored).
+### Example clones (included)
+
+| Slug | Source |
+|------|--------|
+| [soudobem-site](examples/clones/soudobem-site/) | https://soudobemsite.testecliente.com.br/ |
+| [app-soudobem](examples/clones/app-soudobem/) | https://appsoudobem.testecliente.com.br/ |
+| [tachyonix](examples/clones/tachyonix/) | https://www.tachyonix.io/ |
+| [tachyonix-hub](examples/clones/tachyonix-hub/) | https://www.tachyonix.io/hub/?id=inicio |
+
+```bash
+node examples/scripts/serve-clones.mjs
+# → http://localhost:4173/
+```
+
+See [examples/CASE-STUDIES.md](examples/CASE-STUDIES.md).
 
 ---
 
@@ -42,25 +55,12 @@ Store layout: `.siteforge/sources/{sourceId}/` (gitignored).
 
 | Doc | Content |
 |-----|---------|
-| [docs/00-vision.md](docs/00-vision.md) | Vision & non-goals |
-| [docs/05-architecture.md](docs/05-architecture.md) | Target monorepo architecture |
-| [docs/06-mcp-contract.md](docs/06-mcp-contract.md) | MCP tool contract |
-| [docs/08-development-plan.md](docs/08-development-plan.md) | Full development plan |
-| [docs/09-mvp-90-days.md](docs/09-mvp-90-days.md) | 90-day MVP |
-| [docs/name-availability.md](docs/name-availability.md) | npm/GitHub/PyPI name check |
-| [docs/INDEX.md](docs/INDEX.md) | Full reading order |
+| [docs/INDEX.md](docs/INDEX.md) | Reading order |
+| [docs/05-architecture.md](docs/05-architecture.md) | Architecture |
+| [docs/06-mcp-contract.md](docs/06-mcp-contract.md) | MCP tools |
+| [docs/08-development-plan.md](docs/08-development-plan.md) | Development plan |
+| [docs/09-mvp-90-days.md](docs/09-mvp-90-days.md) | MVP timeline |
 | [planning/roadmap.md](planning/roadmap.md) | Tiers |
-| [planning/wbs.md](planning/wbs.md) | Work breakdown |
-
----
-
-## Decisions (research)
-
-1. **Project name:** SiteForge  
-2. **Positioning:** Skill + MCP + optional template — **no** product UI in the MVP  
-3. **Effort sweet spot:** Tier 1→2 (~90–150 person-days); Tier 3 only with traction  
-4. **npm:** publish **scoped** `@siteforge/*` (unscoped `siteforge` is taken)  
-5. **Primary references:** JCodesMore (process/skill), Perfect-Web-Clone (extract patterns), Varalix clone-team (quality)
 
 ---
 
@@ -68,32 +68,26 @@ Store layout: `.siteforge/sources/{sourceId}/` (gitignored).
 
 | Item | Status |
 |------|--------|
-| Research / docs | Done |
-| Name availability | Checked — see [docs/name-availability.md](docs/name-availability.md) |
-| Monorepo bootstrap (Phase 0) | Done |
-| Core extract (styles, screenshots, scroll, raw.html, timeouts) | Done |
-| Phase 2 chunk + assets + CLI/MCP tools | Done |
-| GitHub repo `ggampp/SiteForge` | Done (pushed) |
-| Skill polish + Next template | Pending |
+| Phase 0 bootstrap | Done |
+| Phase 1 extract | Done |
+| Phase 2 chunk + assets | Done |
+| Phase 3 MCP P0 tools | Done |
+| Phase 4 skill + sync | Done |
+| Phase 5 Next template | Done |
+| visual_diff + rebuild | Done |
+| Example clones (4 sites) | Done |
 | npm publish | Pending |
 
 ---
 
 ## Legitimate use
 
-SiteForge is for: migrating sites you own, recovering lost source, learning real layouts.
+SiteForge is for: migrating sites you own, recovering lost source, learning real layouts, authorized demos.
 
 **Not** for phishing, impersonation, or violating third-party ToS.
 
 ---
 
-## Next steps
+## License
 
-1. Expand Phase 1 extract (styles subset, screenshots, CLI polish)  
-2. Phase 2 chunk + assets  
-3. Create GitHub repo `ggampp/SiteForge` when ready to push  
-4. Register npm org `@siteforge` before first publish  
-
----
-
-*Research consolidated from OSS analysis (2026-07). Phase 0 monorepo bootstrapped 2026-07.*
+MIT — see [LICENSE](LICENSE).

@@ -1,0 +1,40 @@
+{
+  "sourceId": "src_mrmt2wvz_3928c5a2",
+  "pageHeight": 980,
+  "validation": {
+    "ok": false,
+    "mutualExclusivity": true,
+    "completeCoverage": false,
+    "sizeControl": false,
+    "issues": [
+      "Coverage gap at bottom (coveredTo=900, pageHeight=980)",
+      "section_002 exceeds maxTokens (16239 > 10000)"
+    ]
+  },
+  "sections": [
+    {
+      "sectionId": "section_001",
+      "selector": "div.siteforge-split",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 720,
+        "height": 900
+      },
+      "estimatedTokens": 6539,
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmt2wvz_3928c5a2\\sections\\section_001.json"
+    },
+    {
+      "sectionId": "section_002",
+      "selector": "div.siteforge-split",
+      "rect": {
+        "x": 720,
+        "y": 0,
+        "width": 720,
+        "height": 900
+      },
+      "estimatedTokens": 16239,
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmt2wvz_3928c5a2\\sections\\section_002.json"
+    }
+  ]
+}

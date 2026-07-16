@@ -1,0 +1,303 @@
+{
+  "sourceId": "src_mrmt1j8n_005f1cbc",
+  "targetDir": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets",
+  "createdAt": "2026-07-16T01:04:31.308Z",
+  "assets": [
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/menu-mobile.jpg",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\000_menu-mobile.jpg",
+      "bytes": 34656,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/close.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\001_close.png",
+      "bytes": 9771,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/logo_branco.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\002_logo_branco.png",
+      "bytes": 413818,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/ing.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\003_ing.png",
+      "bytes": 24631,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/brl.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\004_brl.png",
+      "bytes": 25271,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/logo.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\005_logo.png",
+      "bytes": 145644,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/menu-bars.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\006_menu-bars.png",
+      "bytes": 6452,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/banner_home.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\007_banner_home.png",
+      "bytes": 815649,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/final.gif",
+      "kind": "image",
+      "ok": false,
+      "error": "This operation was aborted"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/bg_reinvent.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\009_bg_reinvent.png",
+      "bytes": 248796,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/sap_silver.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\010_sap_silver.png",
+      "bytes": 16194,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/sapstore.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\011_sapstore.png",
+      "bytes": 49321,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/gcloud.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\012_gcloud.png",
+      "bytes": 40923,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/gpartner.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\013_gpartner.png",
+      "bytes": 6753,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/video_bg.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\014_video_bg.png",
+      "bytes": 696891,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/bg_finish.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\015_bg_finish.png",
+      "bytes": 246644,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2026/06/logo-nlindustria.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\016_logo-nlindustria.png",
+      "bytes": 5080,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2024/12/02.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\017_02.png",
+      "bytes": 8204,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2024/12/03-e1740506815702.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\018_03-e1740506815702.png",
+      "bytes": 55505,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2024/12/04-e1740507256735.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\019_04-e1740507256735.png",
+      "bytes": 66564,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2024/12/05-e1740506957725.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\020_05-e1740506957725.png",
+      "bytes": 10576,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2024/12/06-e1740507134542.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\021_06-e1740507134542.png",
+      "bytes": 17898,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2024/12/07-e1740507039651.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\022_07-e1740507039651.png",
+      "bytes": 5458,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2024/12/tel-avivi.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\023_tel-avivi.png",
+      "bytes": 229328,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2024/12/12.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\024_12.png",
+      "bytes": 364507,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2024/12/btg-pactual-512-e1740998358441.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\025_btg-pactual-512-e1740998358441.png",
+      "bytes": 3566,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2023/05/tachyonix.jpeg",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\026_tachyonix.jpeg",
+      "bytes": 191129,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2023/01/c4b1e9_8499edf230924c9b92a3afa533fc1b41_mv2.webp",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\027_c4b1e9_8499edf230924c9b92a3afa533fc1b41_mv2.webp",
+      "bytes": 77620,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/uploads/2022/07/Pagina-1-5.1-e1657036916611.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\028_Pagina-1-5.1-e1657036916611.png",
+      "bytes": 105088,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/bg_footer.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\029_bg_footer.png",
+      "bytes": 626533,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/logo_branco.png');",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\030_logo_branco.png___",
+      "bytes": 413818,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/sap_blue.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\031_sap_blue.png",
+      "bytes": 12993,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/mail.png');",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\032_mail.png___",
+      "bytes": 402,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/phone.png');",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\033_phone.png___",
+      "bytes": 388,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/loc.png');",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\034_loc.png___",
+      "bytes": 566,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/face.png');",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\035_face.png___",
+      "bytes": 1063,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/insta.png');",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\036_insta.png___",
+      "bytes": 973,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/you.png');",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\037_you.png___",
+      "bytes": 855,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/lin.png');",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\038_lin.png___",
+      "bytes": 1025,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/images/prev.png",
+      "kind": "image",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/images/next.png",
+      "kind": "image",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/images/loading.gif",
+      "kind": "image",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/images/close.png",
+      "kind": "image",
+      "ok": false,
+      "error": "HTTP 404"
+    }
+  ]
+}

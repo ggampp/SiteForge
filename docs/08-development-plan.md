@@ -49,10 +49,9 @@
 ### Phase 3 — MCP P0 (2–3 semanas)
 
 - [x] MCP server stdio (SDK oficial) — tools Phase 1–2 wired  
-- [x] Tools P0 core wired (extract, sections, assets, query, doctor)  
+- [x] Tools P0 core wired (extract, sections, assets, query, doctor, rebuild, visual_diff)  
 - [x] Truncation + path returns (get_section large)  
 - [x] Error codes estruturados  
-
 - [ ] Manual verify Claude Code + Cursor + Grok  
 - [ ] Publish `@siteforge/mcp` (private first ok)  
 
@@ -60,30 +59,30 @@
 
 ### Phase 4 — Skill portátil (2–3 semanas)
 
-- [ ] SKILL.md completo (fases + anti-patterns + MCP-first)  
-- [ ] Degraded browser-MCP mode  
-- [ ] sync-skills multi-host  
-- [ ] Spec template + write_spec_stub (core helper)  
-- [ ] Docs install  
+- [x] SKILL.md completo (fases + anti-patterns + MCP-first)  
+- [x] Degraded browser-MCP mode (documentado)  
+- [x] sync-skills multi-host  
+- [x] Spec template na skill  
+- [x] Docs install / README  
 
 **Exit:** `/siteforge <url>` end-to-end em template com MCP.
 
 ### Phase 5 — Template Next (1–2 semanas)
 
-- [ ] Scaffold Next 16 + Tailwind v4 + shadcn button  
-- [ ] Placeholders research dirs  
-- [ ] README quickstart SiteForge  
-- [ ] Optional: scripts sync from skill  
+- [x] Scaffold Next + Tailwind v4 + button (shadcn-style)  
+- [x] Placeholders research dirs (docs)  
+- [x] README quickstart SiteForge  
+- [x] Example clones gallery + static rebuilds (4 sites)  
 
 **Exit:** `create` ou clone template + skill path documented.
 
 ### Phase 6 — QA tools T2 start (2–3 semanas)
 
-- [ ] `visual_diff`  
+- [x] `visual_diff` (pixelmatch)  
 - [ ] Theme capture  
 - [ ] Interaction capture hover/focus  
 - [ ] `export_design_tokens`  
-- [ ] Benchmark harness  
+- [x] Example rebuilds + serve harness  
 
 **Exit:** score report em 5 sites benchmark.
 

@@ -15,7 +15,10 @@
     "typecheck": "pnpm -r run typecheck",
     "lint": "pnpm -r run lint",
     "doctor": "pnpm --filter @siteforge/cli exec siteforge doctor",
-    "clean": "pnpm -r run clean"
+    "clean": "pnpm -r run clean",
+    "examples:serve": "node examples/scripts/serve-clones.mjs",
+    "examples:sync-gallery": "node examples/scripts/sync-clones-to-gallery.mjs",
+    "skill:sync": "node packages/skill/scripts/sync-skills.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.15.30",

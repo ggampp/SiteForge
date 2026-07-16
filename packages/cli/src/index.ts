@@ -14,6 +14,8 @@ import {
   downloadSourceAssets,
   querySource,
   getPageMetadata,
+  rebuildSource,
+  visualDiff,
 } from "@siteforge/core";
 
 const VERSION = "0.1.0";
@@ -328,6 +330,81 @@ const meta = defineCommand({
   },
 });
 
+const rebuild = defineCommand({
+  meta: {
+    name: "rebuild",
+    description: "Rebuild a source into static HTML + assets",
+  },
+  args: {
+    sourceId: { type: "positional", required: true },
+    out: { type: "string", default: ".siteforge", alias: "o" },
+    target: {
+      type: "string",
+      description: "Output directory for the static site",
+      required: true,
+      alias: "t",
+    },
+    slug: {
+      type: "string",
+      description: "Site slug label",
+      default: "rebuild",
+    },
+    "no-raw": {
+      type: "boolean",
+      description: "Force tree rebuild instead of raw.html",
+      default: false,
+    },
+    "no-assets": {
+      type: "boolean",
+      description: "Skip asset download",
+      default: false,
+    },
+  },
+  async run({ args }) {
+    try {
+      const result = await rebuildSource({
+        outDir: String(args.out),
+        sourceId: String(args.sourceId),
+        targetDir: String(args.target),
+        siteSlug: String(args.slug),
+        preferRawHtml: !args["no-raw"],
+        downloadAssets: !args["no-assets"],
+      });
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
+const diff = defineCommand({
+  meta: {
+    name: "diff",
+    description: "Visual pixel diff between two PNG screenshots",
+  },
+  args: {
+    a: { type: "positional", required: true, description: "Original PNG" },
+    b: { type: "positional", required: true, description: "Candidate PNG" },
+    out: {
+      type: "string",
+      description: "Directory for diff.png",
+      alias: "o",
+    },
+  },
+  async run({ args }) {
+    try {
+      const result = await visualDiff({
+        a: String(args.a),
+        b: String(args.b),
+        outDir: args.out ? String(args.out) : undefined,
+      });
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
 const main = defineCommand({
   meta: {
     name: "siteforge",
@@ -345,6 +422,8 @@ const main = defineCommand({
     download,
     query,
     meta,
+    rebuild,
+    diff,
   },
 });
 

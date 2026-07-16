@@ -11,3 +11,5 @@ export * from "./chunk.js";
 export * from "./assets.js";
 export * from "./query.js";
 export * from "./pipeline.js";
+export * from "./diff.js";
+export * from "./rebuild.js";

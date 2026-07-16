@@ -1,0 +1,49 @@
+{
+  "sourceId": "src_mrmt2atu_1bb21970",
+  "targetDir": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\assets",
+  "createdAt": "2026-07-16T01:04:40.746Z",
+  "assets": [
+    {
+      "url": "https://www.tachyonix.io/hub/img/limpar.svg",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\assets\\000_limpar.svg",
+      "bytes": 799,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/hub/img/lupa.svg",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\assets\\001_lupa.svg",
+      "bytes": 782,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/hub/img/bg_footer.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\assets\\002_bg_footer.png",
+      "bytes": 107617,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/hub/conteudo/inicio/img1.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\assets\\003_img1.png",
+      "bytes": 172284,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/hub/conteudo/inicio/img2.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\assets\\004_img2.png",
+      "bytes": 57158,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/hub/conteudo/inicio/img3.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\assets\\005_img3.png",
+      "bytes": 58925,
+      "ok": true
+    }
+  ]
+}
