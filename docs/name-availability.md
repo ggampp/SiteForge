@@ -28,5 +28,5 @@
 - [x] PyPI — taken (ignore for TS)  
 - [x] GitHub user namespace free  
 - [x] Create GitHub repo `ggampp/SiteForge` (public) — remote `git@github-pessoal:ggampp/SiteForge.git`  
-- [ ] Push initial commit (awaiting explicit confirmation)  
+- [x] Push initial commit (`master` → origin)  
 - [ ] Create npm org `@siteforge` before publish  
