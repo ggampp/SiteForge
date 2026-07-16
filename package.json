@@ -1,0 +1,25 @@
+{
+  "name": "siteforge",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Extract. Spec. Rebuild — website reverse-engineering toolkit for AI coding agents",
+  "license": "MIT",
+  "packageManager": "pnpm@10.33.4",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm -r run build",
+    "dev": "pnpm -r --parallel run dev",
+    "test": "pnpm -r run test",
+    "typecheck": "pnpm -r run typecheck",
+    "lint": "pnpm -r run lint",
+    "doctor": "pnpm --filter @siteforge/cli exec siteforge doctor",
+    "clean": "pnpm -r run clean"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.3"
+  }
+}
