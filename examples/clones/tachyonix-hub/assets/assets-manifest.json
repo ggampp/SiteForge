@@ -1,7 +1,7 @@
 {
-  "sourceId": "src_mrmt2atu_1bb21970",
+  "sourceId": "src_mrmtffpa_049c0041",
   "targetDir": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\assets",
-  "createdAt": "2026-07-16T01:04:40.746Z",
+  "createdAt": "2026-07-16T01:13:43.207Z",
   "assets": [
     {
       "url": "https://www.tachyonix.io/hub/img/limpar.svg",
@@ -43,6 +43,20 @@
       "kind": "image",
       "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\assets\\005_img3.png",
       "bytes": 58925,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrFJA.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\assets\\006_pxiEyp8kv8JHgFVrFJA.ttf",
+      "bytes": 154628,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7V1s.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\assets\\007_pxiByp8kv8JHgFVrLCz7V1s.ttf",
+      "bytes": 150292,
       "ok": true
     }
   ]

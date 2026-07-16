@@ -1,5 +1,5 @@
 {
-  "sourceId": "src_mrmt2atu_1bb21970",
+  "sourceId": "src_mrmtffpa_049c0041",
   "pageHeight": 6284.265625,
   "validation": {
     "ok": false,
@@ -22,7 +22,7 @@
         "height": 49
       },
       "estimatedTokens": 28633,
-      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmt2atu_1bb21970\\sections\\section_001.json"
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmtffpa_049c0041\\sections\\section_001.json"
     },
     {
       "sectionId": "section_002",
@@ -34,7 +34,7 @@
         "height": 851
       },
       "estimatedTokens": 102606,
-      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmt2atu_1bb21970\\sections\\section_002.json"
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmtffpa_049c0041\\sections\\section_002.json"
     },
     {
       "sectionId": "section_003",
@@ -46,7 +46,7 @@
         "height": 5460.265625
       },
       "estimatedTokens": 1941,
-      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmt2atu_1bb21970\\sections\\section_003.json"
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmtffpa_049c0041\\sections\\section_003.json"
     }
   ]
 }

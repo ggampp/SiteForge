@@ -1,7 +1,7 @@
 {
-  "sourceId": "src_mrmt0l4c_27f01b4a",
+  "sourceId": "src_mrmtd5kz_d7f282cb",
   "targetDir": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets",
-  "createdAt": "2026-07-16T01:04:35.312Z",
+  "createdAt": "2026-07-16T01:11:57.793Z",
   "assets": [
     {
       "url": "https://soudobemsite.testecliente.com.br/__l5e/assets-v1/8b0967ee-959a-47ad-827e-6308b3d74cee/sou-do-bem-logo.png",
@@ -43,6 +43,104 @@
       "kind": "image",
       "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\005_mediation-GhnvRA2p.jpg",
       "bytes": 75424,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FO_F.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\006_xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FO_F.ttf",
+      "bytes": 94972,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk7PFO_F.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\007_xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk7PFO_F.ttf",
+      "bytes": 95060,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4jE-_F.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\008_xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4jE-_F.ttf",
+      "bytes": 95096,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4aE-_F.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\009_xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk4aE-_F.ttf",
+      "bytes": 94928,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59E-_F.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\010_xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59E-_F.ttf",
+      "bytes": 95688,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuOKfMZg.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\011_UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuOKfMZg.ttf",
+      "bytes": 325748,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZg.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\012_UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZg.ttf",
+      "bytes": 324820,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fMZg.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\013_UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fMZg.ttf",
+      "bytes": 325304,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYMZg.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\014_UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYMZg.ttf",
+      "bytes": 326048,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuFuYMZg.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\015_UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuFuYMZg.ttf",
+      "bytes": 326468,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLEj6V1s.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\016_pxiByp8kv8JHgFVrLEj6V1s.ttf",
+      "bytes": 151516,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7V1s.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\017_pxiByp8kv8JHgFVrLCz7V1s.ttf",
+      "bytes": 150292,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDD4V1s.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\018_pxiByp8kv8JHgFVrLDD4V1s.ttf",
+      "bytes": 149072,
+      "ok": true
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLBT5V1s.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\assets\\019_pxiByp8kv8JHgFVrLBT5V1s.ttf",
+      "bytes": 147708,
       "ok": true
     }
   ]

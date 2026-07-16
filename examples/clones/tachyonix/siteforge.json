@@ -1,10 +1,12 @@
 {
-  "sourceId": "src_mrmt1j8n_005f1cbc",
+  "sourceId": "src_mrmte9qu_d37ce2e7",
   "siteSlug": "tachyonix",
   "url": "https://www.tachyonix.io/",
   "title": "Home - Tachyonix",
-  "rebuiltAt": "2026-07-16T01:04:31.655Z",
+  "rebuiltAt": "2026-07-16T01:12:52.977Z",
   "mode": "raw",
-  "assetCount": 38,
-  "sectionCount": 3
+  "assetCount": 58,
+  "cssBytes": 815249,
+  "sectionCount": 3,
+  "offlineCss": "assets/siteforge-offline.css"
 }

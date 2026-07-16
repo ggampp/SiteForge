@@ -93,6 +93,8 @@ export const SourceMetaSchema = z.object({
     extraction: z.string(),
     screenshotsDir: z.string().optional(),
     rawHtml: z.string().optional(),
+    stylesheets: z.string().optional(),
+    capturedCss: z.string().optional(),
     sectionsDir: z.string().optional(),
     sectionsIndex: z.string().optional(),
     assetsManifest: z.string().optional(),

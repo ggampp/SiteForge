@@ -1,4 +1,5 @@
 import path from "node:path";
+import { writeFile } from "node:fs/promises";
 import type { Page } from "playwright";
 import {
   type ElementNode,
@@ -12,6 +13,7 @@ import { COMPUTED_STYLE_PROPS } from "./styles.js";
 import { lazyScrollPage } from "./scroll.js";
 import { captureScreenshots } from "./screenshots.js";
 import { SiteForgeException, assertHttpUrl } from "./errors.js";
+import { captureStylesheets, persistStylesheets } from "./css.js";
 
 export interface ExtractOptions {
   url?: string;
@@ -33,6 +35,8 @@ export interface ExtractOptions {
   screenshots?: boolean;
   /** Persist page.content() as raw.html (default true) */
   saveRawHtml?: boolean;
+  /** Capture stylesheets (inline + link + readable cssRules) */
+  captureCss?: boolean;
 }
 
 export interface ExtractSummary {
@@ -47,9 +51,12 @@ export interface ExtractSummary {
     viewportScreenshot?: string;
     fullPageScreenshot?: string;
     rawHtml?: string;
+    stylesheets?: string;
+    capturedCss?: string;
   };
   stats: ExtractionResult["stats"] & {
     scrollSteps?: number;
+    stylesheetCount?: number;
   };
 }
 
@@ -67,6 +74,7 @@ export async function extractPage(
   const captureStyles = options.captureStyles ?? true;
   const doScreenshots = options.screenshots ?? true;
   const saveRawHtml = options.saveRawHtml ?? true;
+  const captureCss = options.captureCss ?? true;
   const doLazyScroll =
     options.lazyScroll ?? (options.url !== undefined && !options.html);
 
@@ -140,7 +148,25 @@ export async function extractPage(
       .getAttribute("lang")
       .catch(() => null);
 
+    // Prefer networkidle settle for real URLs (CSS/fonts); skip offline fixtures
+    if (options.url) {
+      await page
+        .waitForLoadState("networkidle", { timeout: 15_000 })
+        .catch(() => undefined);
+    }
+
     const rawHtml = saveRawHtml ? await page.content() : undefined;
+    const pageUrl = options.url ?? finalUrl ?? "about:blank";
+
+    let stylesheetCount = 0;
+    let cssPaths: { jsonPath?: string; cssPath?: string } = {};
+    if (captureCss) {
+      const bundle = await captureStylesheets(page, pageUrl);
+      stylesheetCount = bundle.sheets.length;
+      // source id not yet known — temp capture after sourceId
+      (page as unknown as { __sfCssBundle?: typeof bundle }).__sfCssBundle =
+        bundle;
+    }
 
     const sourceId = createSourceId();
     const { root, totalElements, maxDepthReached } = await walkDom(page, {
@@ -160,8 +186,6 @@ export async function extractPage(
         fullPage: true,
       });
     }
-
-    const pageUrl = options.url ?? finalUrl ?? "about:blank";
 
     const result: ExtractionResult = ExtractionResultSchema.parse({
       sourceId,
@@ -196,6 +220,16 @@ export async function extractPage(
       rawHtml,
     });
 
+    const bundle = (page as unknown as { __sfCssBundle?: Awaited<ReturnType<typeof captureStylesheets>> }).__sfCssBundle;
+    if (bundle) {
+      const dir = sourceDir(outDir, sourceId);
+      cssPaths = await persistStylesheets(dir, bundle);
+      meta.paths.stylesheets = cssPaths.jsonPath;
+      meta.paths.capturedCss = cssPaths.cssPath;
+      meta.updatedAt = new Date().toISOString();
+      await writeFile(meta.paths.meta, JSON.stringify(meta, null, 2), "utf8");
+    }
+
     await context.close();
 
     return {
@@ -207,10 +241,13 @@ export async function extractPage(
         ...meta.paths,
         viewportScreenshot: screenshotPaths.viewport,
         fullPageScreenshot: screenshotPaths.fullPage,
+        stylesheets: cssPaths.jsonPath,
+        capturedCss: cssPaths.cssPath,
       },
       stats: {
         ...result.stats,
         scrollSteps: doLazyScroll ? scrollSteps : undefined,
+        stylesheetCount,
       },
     };
   } finally {

@@ -22,8 +22,8 @@ export default function GalleryHome() {
             <div className="meta">
               origem: {c.sourceUrl}
               <br />
-              seções: {c.sectionCount} · assets: {c.assetCount} · modo:{" "}
-              {c.mode}
+              seções: {c.sectionCount} · assets: {c.assetCount} · CSS offline:{" "}
+              {Math.round(c.cssBytes / 1024)}KB · {c.mode}
             </div>
             <div className="actions">
               <Link className="btn primary" href={`/view/${c.slug}`}>

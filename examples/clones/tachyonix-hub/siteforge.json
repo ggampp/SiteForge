@@ -1,10 +1,12 @@
 {
-  "sourceId": "src_mrmt2atu_1bb21970",
+  "sourceId": "src_mrmtffpa_049c0041",
   "siteSlug": "tachyonix-hub",
   "url": "https://www.tachyonix.io/hub/?id=inicio",
   "title": "Tachyonix hub",
-  "rebuiltAt": "2026-07-16T01:04:40.883Z",
+  "rebuiltAt": "2026-07-16T01:13:43.276Z",
   "mode": "raw",
-  "assetCount": 6,
-  "sectionCount": 3
+  "assetCount": 8,
+  "cssBytes": 16789,
+  "sectionCount": 3,
+  "offlineCss": "assets/siteforge-offline.css"
 }

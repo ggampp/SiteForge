@@ -4,21 +4,21 @@ Generated 2026-07-15 with SiteForge extract → chunk → download → rebuild.
 
 ## Matrix
 
-| Clone | URL | sourceId | Elements | Sections | Assets | Notes |
-|-------|-----|----------|----------|----------|--------|-------|
-| soudobem-site | https://soudobemsite.testecliente.com.br/ | `src_mrmt0l4c_27f01b4a` | 685 | 17 | 6 | Marketing landing |
-| app-soudobem | https://appsoudobem.testecliente.com.br/ | `src_mrmt2wvz_3928c5a2` | 60 | 2 | 1 | Login shell (auth SPA) |
-| tachyonix | https://www.tachyonix.io/ | `src_mrmt1j8n_005f1cbc` | 312 | 3 | 38 | Product home |
-| tachyonix-hub | https://www.tachyonix.io/hub/?id=inicio | `src_mrmt2atu_1bb21970` | 756 | 3 | 6 | Hub inicio |
+| Clone | URL | sourceId | Sections | Assets | Offline CSS | Notes |
+|-------|-----|----------|----------|--------|-------------|-------|
+| soudobem-site | https://soudobemsite.testecliente.com.br/ | `src_mrmtd5kz_d7f282cb` | 17 | 20 | ~100KB | Landing + CSS offline |
+| app-soudobem | https://appsoudobem.testecliente.com.br/ | `src_mrmtdg8u_fd8c7b02` | 2 | 1 | ~171KB | Login shell (auth SPA) |
+| tachyonix | https://www.tachyonix.io/ | `src_mrmte9qu_d37ce2e7` | 3 | 58 | ~815KB | Theme/bootstrap offline |
+| tachyonix-hub | https://www.tachyonix.io/hub/?id=inicio | `src_mrmtffpa_049c0041` | 3 | 8 | ~17KB | Hub inicio |
 
 ## Pipeline used
 
 ```bash
-siteforge extract <url> --wait 2500
+siteforge extract <url> --wait 3000
 siteforge rebuild <sourceId> -t examples/clones/<slug> --slug <slug>
 ```
 
-Rebuild mode: **raw.html** + asset URL rewrite to local `assets/`.
+Rebuild mode: **raw.html** + `assets/siteforge-offline.css` (stylesheets capturados/baixados, `url()` reescritos) + assets locais.
 
 ## How to view
 

@@ -6,7 +6,7 @@ import { Readable } from "node:stream";
 import type { ElementNode, ExtractionResult } from "./schema.js";
 import { SiteForgeException } from "./errors.js";
 
-export type AssetKind = "image" | "video" | "font" | "other";
+export type AssetKind = "image" | "video" | "font" | "stylesheet" | "other";
 
 export interface DiscoveredAsset {
   url: string;
@@ -52,6 +52,7 @@ function kindFromUrl(url: string, hint?: AssetKind): AssetKind {
   const lower = url.toLowerCase();
   if (/\.(woff2?|ttf|otf|eot)(\?|$)/i.test(lower)) return "font";
   if (/\.(mp4|webm|ogg|mov)(\?|$)/i.test(lower)) return "video";
+  if (/\.(css)(\?|$)/i.test(lower) || lower.includes("text/css")) return "stylesheet";
   if (/\.(png|jpe?g|gif|webp|svg|avif|ico|bmp)(\?|$)/i.test(lower)) return "image";
   return "other";
 }
@@ -82,10 +83,13 @@ export function discoverAssetsFromTree(
     }
     if (n.tag === "link") {
       const rel = (n.attributes?.rel ?? "").toLowerCase();
+      if (rel.includes("stylesheet") || n.attributes?.as === "style") {
+        add(n.attributes?.href, "stylesheet", "link[rel=stylesheet]");
+      }
       if (rel.includes("icon") || rel.includes("apple-touch-icon")) {
         add(n.attributes?.href, "image", "link[rel=icon]");
       }
-      if (rel.includes("stylesheet") === false && /\.woff/i.test(n.attributes?.href ?? "")) {
+      if (/\.woff/i.test(n.attributes?.href ?? "")) {
         add(n.attributes?.href, "font", "link[href]");
       }
     }
@@ -111,17 +115,26 @@ export function discoverAssetsFromExtraction(
   return discoverAssetsFromTree(extraction.root, base);
 }
 
-function safeFileName(url: string, index: number): string {
+function safeFileName(url: string, index: number, kind?: AssetKind): string {
   let name = "asset";
   try {
     const u = new URL(url);
     name = path.basename(u.pathname) || "asset";
+    // Google fonts / CDN paths often end without useful names
+    if (!name || name === "/" || name.length < 2) {
+      name = `asset_${index}`;
+    }
   } catch {
     name = "asset";
   }
   name = name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 120);
   if (!name || name === "." || name === "..") name = `asset_${index}`;
-  if (!path.extname(name)) name += ".bin";
+  if (!path.extname(name)) {
+    if (kind === "stylesheet") name += ".css";
+    else if (kind === "font") name += ".woff2";
+    else if (kind === "image") name += ".png";
+    else name += ".bin";
+  }
   return `${String(index).padStart(3, "0")}_${name}`;
 }
 
@@ -183,7 +196,7 @@ export async function downloadAssets(
   await mkdir(options.targetDir, { recursive: true });
 
   const results = await mapPool(options.assets, concurrency, async (asset, index) => {
-    const fileName = safeFileName(asset.url, index);
+    const fileName = safeFileName(asset.url, index, asset.kind);
     try {
       const dest = resolveSafeTargetPath(options.targetDir, fileName);
       const controller = new AbortController();
@@ -192,7 +205,13 @@ export async function downloadAssets(
         const res = await fetch(asset.url, {
           signal: controller.signal,
           redirect: "follow",
-          headers: { "User-Agent": "SiteForge/0.1 (+https://github.com/ggampp/SiteForge)" },
+          headers: {
+            "User-Agent": "SiteForge/0.1 (+https://github.com/ggampp/SiteForge)",
+            Accept:
+              asset.kind === "stylesheet"
+                ? "text/css,*/*;q=0.1"
+                : "*/*",
+          },
         });
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}`);
@@ -202,6 +221,22 @@ export async function downloadAssets(
           throw new Error(`Content-Length ${len} exceeds maxBytes ${maxBytes}`);
         }
         if (!res.body) throw new Error("Empty body");
+
+        // For CSS prefer text write (we may post-process)
+        if (asset.kind === "stylesheet") {
+          const text = await res.text();
+          if (Buffer.byteLength(text) > maxBytes) {
+            throw new Error(`CSS size exceeds maxBytes ${maxBytes}`);
+          }
+          await writeFile(dest, text, "utf8");
+          return {
+            ok: true as const,
+            url: asset.url,
+            kind: asset.kind,
+            path: dest,
+            bytes: Buffer.byteLength(text),
+          };
+        }
 
         const nodeStream = Readable.fromWeb(
           res.body as import("node:stream/web").ReadableStream,

@@ -1,10 +1,12 @@
 {
-  "sourceId": "src_mrmt0l4c_27f01b4a",
+  "sourceId": "src_mrmtd5kz_d7f282cb",
   "siteSlug": "soudobem-site",
   "url": "https://soudobemsite.testecliente.com.br/",
   "title": "Sou do Bem — O movimento das pessoas do Bem",
-  "rebuiltAt": "2026-07-16T01:04:35.415Z",
+  "rebuiltAt": "2026-07-16T01:11:58.504Z",
   "mode": "raw",
-  "assetCount": 6,
-  "sectionCount": 17
+  "assetCount": 20,
+  "cssBytes": 101900,
+  "sectionCount": 17,
+  "offlineCss": "assets/siteforge-offline.css"
 }

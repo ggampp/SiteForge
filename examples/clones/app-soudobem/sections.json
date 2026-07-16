@@ -1,5 +1,5 @@
 {
-  "sourceId": "src_mrmt2wvz_3928c5a2",
+  "sourceId": "src_mrmtdg8u_fd8c7b02",
   "pageHeight": 980,
   "validation": {
     "ok": false,
@@ -22,7 +22,7 @@
         "height": 900
       },
       "estimatedTokens": 6539,
-      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmt2wvz_3928c5a2\\sections\\section_001.json"
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmtdg8u_fd8c7b02\\sections\\section_001.json"
     },
     {
       "sectionId": "section_002",
@@ -34,7 +34,7 @@
         "height": 900
       },
       "estimatedTokens": 16239,
-      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmt2wvz_3928c5a2\\sections\\section_002.json"
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\.siteforge\\sources\\src_mrmtdg8u_fd8c7b02\\sections\\section_002.json"
     }
   ]
 }

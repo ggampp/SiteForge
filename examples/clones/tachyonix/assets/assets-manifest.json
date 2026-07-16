@@ -1,7 +1,7 @@
 {
-  "sourceId": "src_mrmt1j8n_005f1cbc",
+  "sourceId": "src_mrmte9qu_d37ce2e7",
   "targetDir": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets",
-  "createdAt": "2026-07-16T01:04:31.308Z",
+  "createdAt": "2026-07-16T01:12:52.844Z",
   "assets": [
     {
       "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/menu-mobile.jpg",
@@ -62,8 +62,9 @@
     {
       "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/final.gif",
       "kind": "image",
-      "ok": false,
-      "error": "This operation was aborted"
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\008_final.gif",
+      "bytes": 10238919,
+      "ok": true
     },
     {
       "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/bg_reinvent.png",
@@ -298,6 +299,277 @@
       "kind": "image",
       "ok": false,
       "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/fonts/fontawesome-webfont.eot?v=4.7.0",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/fonts/fontawesome-webfont.woff2?v=4.7.0",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/fonts/fontawesome-webfont.woff?v=4.7.0",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/fonts/fontawesome-webfont.ttf?v=4.7.0",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular",
+      "kind": "image",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/fonts/Poppins-Regular.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\049_Poppins-Regular.ttf",
+      "bytes": 158240,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/fonts/Poppins-Bold.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\050_Poppins-Bold.ttf",
+      "bytes": 153944,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/fonts/Poppins-Light.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\051_Poppins-Light.ttf",
+      "bytes": 159892,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/fonts/Montserrat-Regular.ttf",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/fonts/Montserrat-Light.ttf",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/img/arrow.png",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\054_arrow.png",
+      "bytes": 710,
+      "ok": true
+    },
+    {
+      "url": "https://www.tachyonix.io/owl.video.play.png",
+      "kind": "image",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/images/loading.gif",
+      "kind": "image",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/images/prev.png",
+      "kind": "image",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/images/next.png",
+      "kind": "image",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/images/close.png",
+      "kind": "image",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/webfonts/fa-brands-400.woff2",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/webfonts/fa-brands-400.woff",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/webfonts/fa-brands-400.ttf",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/webfonts/fa-regular-400.woff2",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/webfonts/fa-regular-400.woff",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/webfonts/fa-regular-400.ttf",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/webfonts/fa-solid-900.woff2",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/webfonts/fa-solid-900.woff",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/webfonts/fa-solid-900.ttf",
+      "kind": "font",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://www.tachyonix.io/wp-content/themes/Tachonyx/dist/css/owl.video.play.png",
+      "kind": "image",
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "url": "https://use.fontawesome.com/releases/v5.4.1/webfonts/fa-brands-400.woff2",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\070_fa-brands-400.woff2",
+      "bytes": 68240,
+      "ok": true
+    },
+    {
+      "url": "https://use.fontawesome.com/releases/v5.4.1/webfonts/fa-brands-400.woff",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\071_fa-brands-400.woff",
+      "bytes": 79752,
+      "ok": true
+    },
+    {
+      "url": "https://use.fontawesome.com/releases/v5.4.1/webfonts/fa-brands-400.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\072_fa-brands-400.ttf",
+      "bytes": 123304,
+      "ok": true
+    },
+    {
+      "url": "https://use.fontawesome.com/releases/v5.4.1/webfonts/fa-regular-400.woff2",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\073_fa-regular-400.woff2",
+      "bytes": 14880,
+      "ok": true
+    },
+    {
+      "url": "https://use.fontawesome.com/releases/v5.4.1/webfonts/fa-regular-400.woff",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\074_fa-regular-400.woff",
+      "bytes": 18168,
+      "ok": true
+    },
+    {
+      "url": "https://use.fontawesome.com/releases/v5.4.1/webfonts/fa-regular-400.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\075_fa-regular-400.ttf",
+      "bytes": 40348,
+      "ok": true
+    },
+    {
+      "url": "https://use.fontawesome.com/releases/v5.4.1/webfonts/fa-solid-900.woff2",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\076_fa-solid-900.woff2",
+      "bytes": 72000,
+      "ok": true
+    },
+    {
+      "url": "https://use.fontawesome.com/releases/v5.4.1/webfonts/fa-solid-900.woff",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\077_fa-solid-900.woff",
+      "bytes": 92696,
+      "ok": true
+    },
+    {
+      "url": "https://use.fontawesome.com/releases/v5.4.1/webfonts/fa-solid-900.ttf",
+      "kind": "font",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\078_fa-solid-900.ttf",
+      "bytes": 191112,
+      "ok": true
+    },
+    {
+      "url": "https://use.typekit.net/af/2f2a9c/00000000000000003b9b099c/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\079_asset_79.png",
+      "bytes": 107464,
+      "ok": true
+    },
+    {
+      "url": "https://use.typekit.net/af/2f2a9c/00000000000000003b9b099c/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\080_asset_80.png",
+      "bytes": 124992,
+      "ok": true
+    },
+    {
+      "url": "https://use.typekit.net/af/2f2a9c/00000000000000003b9b099c/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\081_asset_81.png",
+      "bytes": 378160,
+      "ok": true
+    },
+    {
+      "url": "https://use.typekit.net/af/080d95/00000000000000003b9b099d/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\082_asset_82.png",
+      "bytes": 111368,
+      "ok": true
+    },
+    {
+      "url": "https://use.typekit.net/af/080d95/00000000000000003b9b099d/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\083_asset_83.png",
+      "bytes": 129228,
+      "ok": true
+    },
+    {
+      "url": "https://use.typekit.net/af/080d95/00000000000000003b9b099d/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3",
+      "kind": "image",
+      "path": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix\\assets\\084_asset_84.png",
+      "bytes": 377928,
+      "ok": true
     }
   ]
 }

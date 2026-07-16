@@ -2,16 +2,16 @@
 
 SiteForge rebuild of `https://www.tachyonix.io/`.
 
-- **sourceId:** `src_mrmt1j8n_005f1cbc`
+- **sourceId:** `src_mrmte9qu_d37ce2e7`
 - **mode:** raw
-- **assets:** 38
+- **assets:** 58
+- **offline CSS:** 815249 bytes → `assets/siteforge-offline.css`
 - **sections:** 3
 
 ## Serve locally
 
 ```bash
 npx --yes serve .
-# or: python -m http.server 4173
 ```
 
-Legitimate use only — authorized clones / demos.
+CSS is inlined via `assets/siteforge-offline.css` so the clone works offline.

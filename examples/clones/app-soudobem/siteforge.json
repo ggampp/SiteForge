@@ -1,10 +1,12 @@
 {
-  "sourceId": "src_mrmt2wvz_3928c5a2",
+  "sourceId": "src_mrmtdg8u_fd8c7b02",
   "siteSlug": "app-soudobem",
   "url": "https://appsoudobem.testecliente.com.br/",
   "title": "Entrar — Sou do Bem",
-  "rebuiltAt": "2026-07-16T01:04:36.650Z",
+  "rebuiltAt": "2026-07-16T01:12:06.970Z",
   "mode": "raw",
   "assetCount": 1,
-  "sectionCount": 2
+  "cssBytes": 171457,
+  "sectionCount": 2,
+  "offlineCss": "assets/siteforge-offline.css"
 }

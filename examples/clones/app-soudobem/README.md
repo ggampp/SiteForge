@@ -2,16 +2,16 @@
 
 SiteForge rebuild of `https://appsoudobem.testecliente.com.br/`.
 
-- **sourceId:** `src_mrmt2wvz_3928c5a2`
+- **sourceId:** `src_mrmtdg8u_fd8c7b02`
 - **mode:** raw
 - **assets:** 1
+- **offline CSS:** 171457 bytes → `assets/siteforge-offline.css`
 - **sections:** 2
 
 ## Serve locally
 
 ```bash
 npx --yes serve .
-# or: python -m http.server 4173
 ```
 
-Legitimate use only — authorized clones / demos.
+CSS is inlined via `assets/siteforge-offline.css` so the clone works offline.
