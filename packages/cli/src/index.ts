@@ -16,6 +16,14 @@ import {
   getPageMetadata,
   rebuildSource,
   visualDiff,
+  maybePrintEthicsBanner,
+  exportDesignTokens,
+  writeSpecStub,
+  captureTheme,
+  captureInteraction,
+  screenshotPage,
+  extractPagePhased,
+  getExtractionStatus,
 } from "@siteforge/core";
 
 const VERSION = "0.1.0";
@@ -405,6 +413,193 @@ const diff = defineCommand({
   },
 });
 
+const tokens = defineCommand({
+  meta: {
+    name: "tokens",
+    description: "Export design tokens (colors/fonts) from a source",
+  },
+  args: {
+    sourceId: { type: "positional", required: true },
+    out: { type: "string", default: ".siteforge", alias: "o" },
+    target: { type: "string", description: "Output directory for tokens" },
+  },
+  async run({ args }) {
+    try {
+      const result = await exportDesignTokens(
+        String(args.out),
+        String(args.sourceId),
+        args.target ? String(args.target) : undefined,
+      );
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
+const spec = defineCommand({
+  meta: {
+    name: "spec",
+    description: "Write a markdown spec stub for a section",
+  },
+  args: {
+    sourceId: { type: "positional", required: true },
+    sectionId: { type: "positional", required: true },
+    out: { type: "string", default: ".siteforge", alias: "o" },
+    target: {
+      type: "string",
+      description: "Markdown output path",
+      alias: "t",
+    },
+    name: { type: "string", description: "Component name override" },
+  },
+  async run({ args }) {
+    try {
+      const result = await writeSpecStub({
+        outDir: String(args.out),
+        sourceId: String(args.sourceId),
+        sectionId: String(args.sectionId),
+        targetPath: args.target ? String(args.target) : undefined,
+        componentName: args.name ? String(args.name) : undefined,
+      });
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
+const theme = defineCommand({
+  meta: {
+    name: "theme",
+    description: "Capture light/dark theme snapshots for a URL",
+  },
+  args: {
+    url: { type: "positional", required: true },
+    out: { type: "string", default: ".siteforge", alias: "o" },
+    wait: { type: "string", default: "1000" },
+  },
+  async run({ args }) {
+    try {
+      const result = await captureTheme({
+        url: String(args.url),
+        outDir: String(args.out),
+        waitMs: Number(args.wait) || 0,
+      });
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
+const interact = defineCommand({
+  meta: {
+    name: "interact",
+    description: "Capture hover/focus/active style diff for a selector",
+  },
+  args: {
+    url: { type: "positional", required: true },
+    selector: { type: "positional", required: true },
+    kind: {
+      type: "string",
+      description: "hover | focus | active",
+      default: "hover",
+    },
+    out: { type: "string", default: ".siteforge", alias: "o" },
+    wait: { type: "string", default: "500" },
+  },
+  async run({ args }) {
+    try {
+      const kind = String(args.kind) as "hover" | "focus" | "active";
+      const result = await captureInteraction({
+        url: String(args.url),
+        selector: String(args.selector),
+        kind,
+        outDir: String(args.out),
+        waitMs: Number(args.wait) || 0,
+      });
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
+const screenshot = defineCommand({
+  meta: {
+    name: "screenshot",
+    description: "Capture viewport/full-page screenshots of a URL",
+  },
+  args: {
+    url: { type: "positional", required: true },
+    out: { type: "string", default: ".siteforge", alias: "o" },
+    "no-full": { type: "boolean", default: false },
+    wait: { type: "string", default: "500" },
+  },
+  async run({ args }) {
+    try {
+      const result = await screenshotPage({
+        url: String(args.url),
+        outDir: String(args.out),
+        fullPage: !args["no-full"],
+        waitMs: Number(args.wait) || 0,
+      });
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
+const extractPhased = defineCommand({
+  meta: {
+    name: "extract-phased",
+    description: "Start async extract; poll with job-status",
+  },
+  args: {
+    url: { type: "positional", required: true },
+    out: { type: "string", default: ".siteforge", alias: "o" },
+    wait: { type: "string", default: "2000" },
+    timeout: { type: "string", default: "60000" },
+  },
+  async run({ args }) {
+    try {
+      const result = await extractPagePhased({
+        url: String(args.url),
+        outDir: String(args.out),
+        waitMs: Number(args.wait) || 0,
+        timeoutMs: Number(args.timeout) || 60_000,
+      });
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
+const jobStatus = defineCommand({
+  meta: {
+    name: "job-status",
+    description: "Poll phased extract job status",
+  },
+  args: {
+    jobId: { type: "positional", required: true },
+    out: { type: "string", default: ".siteforge", alias: "o" },
+  },
+  async run({ args }) {
+    try {
+      const result = await getExtractionStatus(
+        String(args.out),
+        String(args.jobId),
+      );
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      printError(err);
+    }
+  },
+});
+
 const main = defineCommand({
   meta: {
     name: "siteforge",
@@ -424,10 +619,18 @@ const main = defineCommand({
     meta,
     rebuild,
     diff,
+    tokens,
+    spec,
+    theme,
+    interact,
+    screenshot,
+    "extract-phased": extractPhased,
+    "job-status": jobStatus,
   },
 });
 
 export async function runMain(): Promise<void> {
+  await maybePrintEthicsBanner();
   await cittyRunMain(main);
 }
 

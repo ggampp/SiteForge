@@ -1,0 +1,17 @@
+{
+  "slug": "soudobem-site",
+  "url": "https://soudobemsite.testecliente.com.br/",
+  "beforeOk": true,
+  "before": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\_reference\\before.png",
+  "after": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\_reference\\after.png",
+  "diff": {
+    "ok": true,
+    "width": 1440,
+    "height": 900,
+    "diffPixels": 114791,
+    "totalPixels": 1296000,
+    "score": 0.9114266975308642,
+    "diffPath": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\soudobem-site\\_reference\\diff.png"
+  },
+  "capturedAt": "2026-07-22T19:53:21.663Z"
+}

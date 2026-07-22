@@ -29,6 +29,9 @@ describe("visualDiff", () => {
       const r = await visualDiff({ a, b, outDir: dir });
       expect(r.score).toBe(1);
       expect(r.diffPixels).toBe(0);
+      expect(r.diffPath).toBeTruthy();
+      const { access } = await import("node:fs/promises");
+      await access(r.diffPath!);
     } finally {
       await rm(dir, { recursive: true, force: true });
     }
@@ -44,6 +47,9 @@ describe("visualDiff", () => {
       const r = await visualDiff({ a, b, outDir: dir });
       expect(r.score).toBeLessThan(0.5);
       expect(r.diffPixels).toBeGreaterThan(0);
+      expect(r.diffPath).toBeTruthy();
+      const { access } = await import("node:fs/promises");
+      await access(r.diffPath!);
     } finally {
       await rm(dir, { recursive: true, force: true });
     }

@@ -1,0 +1,28 @@
+{
+  "report": [
+    {
+      "slug": "soudobem-site",
+      "ok": true,
+      "beforeOk": true,
+      "score": 0.9114266975308642
+    },
+    {
+      "slug": "app-soudobem",
+      "ok": true,
+      "beforeOk": true,
+      "score": 0.9735987654320988
+    },
+    {
+      "slug": "tachyonix",
+      "ok": true,
+      "beforeOk": true,
+      "score": 0.9021998456790123
+    },
+    {
+      "slug": "tachyonix-hub",
+      "ok": true,
+      "beforeOk": true,
+      "score": 0.886537037037037
+    }
+  ]
+}

@@ -40,7 +40,20 @@ cd examples/gallery && pnpm install && pnpm dev
 1. Client-only SPAs after login are **not** fully mirrored without credentials.
 2. External CDN assets not discovered in the DOM tree may still 404 offline.
 3. Interactive widgets (live chat, analytics, auth APIs) are not reimplemented.
-4. Visual score vs original should be measured with `siteforge diff` after local screenshots.
+4. Visual score vs original measured with `siteforge diff` / `pnpm case:refs`.
+
+## Visual diff scores (2026-07-22)
+
+Captured via `node scripts/capture-case-references.mjs` → `examples/clones/<slug>/_reference/`.
+
+| Clone | Before live? | Score (1 = identical) |
+|-------|--------------|------------------------|
+| soudobem-site | yes | 0.911 |
+| app-soudobem | yes | 0.974 |
+| tachyonix | yes | 0.902 |
+| tachyonix-hub | yes | 0.887 |
+
+Artifacts per clone: `_reference/before.png`, `after.png`, `diff.png`, `scores.json`.
 
 ## Ethics
 

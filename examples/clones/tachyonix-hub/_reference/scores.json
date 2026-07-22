@@ -1,0 +1,17 @@
+{
+  "slug": "tachyonix-hub",
+  "url": "https://www.tachyonix.io/hub/?id=inicio",
+  "beforeOk": true,
+  "before": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\_reference\\before.png",
+  "after": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\_reference\\after.png",
+  "diff": {
+    "ok": true,
+    "width": 1440,
+    "height": 900,
+    "diffPixels": 147048,
+    "totalPixels": 1296000,
+    "score": 0.886537037037037,
+    "diffPath": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\tachyonix-hub\\_reference\\diff.png"
+  },
+  "capturedAt": "2026-07-22T19:53:38.032Z"
+}

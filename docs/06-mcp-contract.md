@@ -109,11 +109,11 @@ Health: browsers installed, versions, disk.
 
 ---
 
-## Tools P1 (Tier 2)
+## Tools P1 (Tier 2) — implemented
 
 ### `extract_page_phased` + `get_extraction_status`
 
-Quick return + poll (como PWC extract_quick).
+Quick return + poll (job JSON under `.siteforge/jobs/`).
 
 ### `capture_interaction`
 
@@ -122,7 +122,7 @@ Quick return + poll (como PWC extract_quick).
 
 ### `capture_theme`
 
-Light/dark dual capture se suportado.
+Light/dark dual capture (emulated color-scheme + class toggles).
 
 ### `visual_diff`
 
@@ -136,6 +136,10 @@ Gera markdown spec skeleton a partir de `sectionId` (template JCodesMore-like).
 ### `export_design_tokens`
 
 CSS variables + color/font summary → snippet para `globals.css`.
+
+### `screenshot_page`
+
+Viewport/full-page PNG for url or sourceId.
 
 ---
 

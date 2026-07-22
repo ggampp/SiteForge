@@ -8,8 +8,12 @@ on:
 
 jobs:
   build-test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
 
     steps:
       - name: Checkout
@@ -29,8 +33,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install Playwright Chromium
+      - name: Install Playwright Chromium (Linux deps)
+        if: runner.os == 'Linux'
         run: pnpm exec playwright install chromium --with-deps
+
+      - name: Install Playwright Chromium (Windows)
+        if: runner.os == 'Windows'
+        run: pnpm exec playwright install chromium
 
       - name: Typecheck
         run: pnpm typecheck
@@ -43,3 +52,31 @@ jobs:
 
       - name: Doctor
         run: pnpm --filter @siteforge/cli exec node dist/bin.js doctor
+
+      - name: E2E smoke
+        run: node scripts/e2e-smoke.mjs
+
+      - name: Verify MCP tools
+        run: node scripts/verify-mcp.mjs
+
+      - name: Skill sync
+        run: pnpm skill:sync
+
+  template-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: templates/next-shadcn/pnpm-lock.yaml
+      - name: Install + build virgin template
+        working-directory: templates/next-shadcn
+        run: |
+          pnpm install --ignore-workspace
+          pnpm build

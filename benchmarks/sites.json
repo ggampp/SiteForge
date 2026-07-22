@@ -1,6 +1,11 @@
 {
   "version": 1,
-  "description": "Public marketing pages for smoke / future golden tests (manual Phase 0)",
+  "description": "Public pages for smoke / golden extract benchmarks",
+  "budgets": {
+    "extractColdMs": 120000,
+    "listSectionsMs": 5000,
+    "minSections": 1
+  },
   "sites": [
     {
       "id": "example",
@@ -11,6 +16,26 @@
       "id": "example-httpbin-html",
       "url": "https://httpbin.org/html",
       "notes": "Simple HTML response"
+    },
+    {
+      "id": "mdn-html",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+      "notes": "Marketing/docs layout; heavier DOM"
+    },
+    {
+      "id": "wikipedia-main",
+      "url": "https://en.wikipedia.org/wiki/Main_Page",
+      "notes": "Complex but public; sections expected"
+    },
+    {
+      "id": "web-dev",
+      "url": "https://web.dev/",
+      "notes": "Modern marketing landing"
+    },
+    {
+      "id": "astro-build",
+      "url": "https://astro.build/",
+      "notes": "Framework marketing site"
     }
   ]
 }

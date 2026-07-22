@@ -8,6 +8,7 @@ export type ErrorCode =
   | "PATH_ESCAPE"
   | "EXTRACT_FAILED"
   | "DOWNLOAD_FAILED"
+  | "PRIVATE_NETWORK_BLOCKED"
   | "INTERNAL";
 
 export class SiteForgeException extends Error {

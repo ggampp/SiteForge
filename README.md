@@ -31,7 +31,7 @@ pnpm --filter @siteforge/cli exec siteforge rebuild <sourceId> -t examples/clone
 
 ### CLI commands
 
-`doctor` · `extract` · `list` · `chunk` · `sections` · `section` · `download` · `query` · `meta` · `rebuild` · `diff`
+`doctor` · `extract` · `list` · `chunk` · `sections` · `section` · `download` · `query` · `meta` · `rebuild` · `diff` · `tokens` · `spec` · `theme` · `interact` · `screenshot` · `extract-phased` · `job-status`
 
 ### Example clones (included)
 
@@ -75,7 +75,10 @@ See [examples/CASE-STUDIES.md](examples/CASE-STUDIES.md).
 | Phase 4 skill + sync | Done |
 | Phase 5 Next template | Done |
 | visual_diff + rebuild | Done |
-| Example clones (4 sites) | Done |
+| T2 theme / interaction / tokens / phased / spec stub | Done |
+| Hardening (SSRF, retries, Windows CI, e2e) | Done |
+| Example clones (4 sites) + reference diffs | Done |
+| Benchmark runner (≥5 sites catalog) | Done |
 | npm publish | Pending |
 
 ---

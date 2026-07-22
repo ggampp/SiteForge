@@ -13,6 +13,7 @@ import { COMPUTED_STYLE_PROPS } from "./styles.js";
 import { lazyScrollPage } from "./scroll.js";
 import { captureScreenshots } from "./screenshots.js";
 import { SiteForgeException, assertHttpUrl } from "./errors.js";
+import { assertSafeHttpUrl } from "./ssrf.js";
 import { captureStylesheets, persistStylesheets } from "./css.js";
 
 export interface ExtractOptions {
@@ -24,6 +25,8 @@ export interface ExtractOptions {
   waitMs?: number;
   /** Navigation timeout for page.goto (ms) */
   timeoutMs?: number;
+  /** Overall extract deadline including scroll/walk (ms); default timeoutMs + 120s */
+  deadlineMs?: number;
   maxDepth?: number;
   headless?: boolean;
   /** Capture computed styles on each node (default true) */
@@ -37,6 +40,10 @@ export interface ExtractOptions {
   saveRawHtml?: boolean;
   /** Capture stylesheets (inline + link + readable cssRules) */
   captureCss?: boolean;
+  /** SSRF guard for private IPs (default true) */
+  ssrfGuard?: boolean;
+  /** Allow localhost when SSRF guard on (default true) */
+  allowLocalhost?: boolean;
 }
 
 export interface ExtractSummary {
@@ -86,7 +93,15 @@ export async function extractPage(
   }
   if (options.url) {
     assertHttpUrl(options.url);
+    assertSafeHttpUrl(options.url, {
+      allowLocalhost: options.allowLocalhost ?? true,
+      enabled: options.ssrfGuard ?? true,
+    });
   }
+
+  const deadlineMs =
+    options.deadlineMs ?? timeoutMs + 120_000;
+  const deadlineAt = Date.now() + deadlineMs;
 
   const manager = new BrowserManager({
     headless: options.headless ?? true,
@@ -94,6 +109,15 @@ export async function extractPage(
   });
 
   const started = Date.now();
+  const assertDeadline = (): void => {
+    if (Date.now() > deadlineAt) {
+      throw new SiteForgeException(
+        "TIMEOUT",
+        `Extract exceeded overall deadline of ${deadlineMs}ms`,
+        "Increase deadlineMs/timeoutMs or reduce page complexity",
+      );
+    }
+  };
   try {
     const { context, page } = await manager.newPage();
 
@@ -124,6 +148,7 @@ export async function extractPage(
     if (waitMs > 0) {
       await page.waitForTimeout(waitMs);
     }
+    assertDeadline();
 
     let scrollSteps = 0;
     if (doLazyScroll) {
@@ -134,6 +159,7 @@ export async function extractPage(
       });
       scrollSteps = scroll.steps;
     }
+    assertDeadline();
 
     const title = await page.title();
     const finalUrl = page.url();

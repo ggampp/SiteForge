@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * SiteForge MCP server — extract, sections, assets, query (Phase 1–2).
+ * SiteForge MCP server — extract, sections, assets, query, T2 fidelity tools.
  */
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -24,6 +24,13 @@ import {
   loadRawHtml,
   rebuildSource,
   visualDiff,
+  captureTheme,
+  captureInteraction,
+  exportDesignTokens,
+  extractPagePhased,
+  getExtractionStatus,
+  writeSpecStub,
+  screenshotPage,
 } from "@siteforge/core";
 
 const server = new Server(
@@ -66,8 +73,37 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
           saveRawHtml: { type: "boolean", default: true },
           lazyScroll: { type: "boolean", default: true },
           screenshots: { type: "boolean", default: true },
+          allowLocalhost: { type: "boolean", default: true },
+          ssrfGuard: { type: "boolean", default: true },
         },
         required: ["url"],
+      },
+    },
+    {
+      name: "extract_page_phased",
+      description:
+        "Start extract asynchronously; returns jobId for get_extraction_status",
+      inputSchema: {
+        type: "object",
+        properties: {
+          url: { type: "string" },
+          outDir: { type: "string", default: ".siteforge" },
+          waitMs: { type: "number", default: 2000 },
+          timeoutMs: { type: "number", default: 60000 },
+        },
+        required: ["url"],
+      },
+    },
+    {
+      name: "get_extraction_status",
+      description: "Poll phased extraction job status",
+      inputSchema: {
+        type: "object",
+        properties: {
+          jobId: { type: "string" },
+          outDir: { type: "string", default: ".siteforge" },
+        },
+        required: ["jobId"],
       },
     },
     {
@@ -143,17 +179,15 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     },
     {
       name: "download_assets",
-      description: "Download assets for a source into targetDir (default source assets/)",
+      description:
+        "Download assets for a source into targetDir (default source assets/)",
       inputSchema: {
         type: "object",
         properties: {
           sourceId: { type: "string" },
           outDir: { type: "string", default: ".siteforge" },
           targetDir: { type: "string" },
-          assetUrls: {
-            type: "array",
-            items: { type: "string" },
-          },
+          assetUrls: { type: "array", items: { type: "string" } },
         },
         required: ["sourceId"],
       },
@@ -200,6 +234,78 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
         required: ["a", "b"],
       },
     },
+    {
+      name: "screenshot_page",
+      description: "Capture viewport/full-page PNG for a url or sourceId",
+      inputSchema: {
+        type: "object",
+        properties: {
+          url: { type: "string" },
+          sourceId: { type: "string" },
+          outDir: { type: "string", default: ".siteforge" },
+          fullPage: { type: "boolean", default: true },
+          waitMs: { type: "number" },
+        },
+      },
+    },
+    {
+      name: "capture_theme",
+      description: "Capture light/dark theme snapshots + CSS variables",
+      inputSchema: {
+        type: "object",
+        properties: {
+          url: { type: "string" },
+          outDir: { type: "string", default: ".siteforge" },
+          sourceId: { type: "string" },
+          waitMs: { type: "number" },
+        },
+        required: ["url"],
+      },
+    },
+    {
+      name: "capture_interaction",
+      description: "Style diff before/after hover|focus|active on a selector",
+      inputSchema: {
+        type: "object",
+        properties: {
+          url: { type: "string" },
+          selector: { type: "string" },
+          kind: { type: "string", enum: ["hover", "focus", "active"] },
+          outDir: { type: "string", default: ".siteforge" },
+          sourceId: { type: "string" },
+          waitMs: { type: "number" },
+        },
+        required: ["url", "selector", "kind"],
+      },
+    },
+    {
+      name: "export_design_tokens",
+      description: "Export colors/fonts from extraction to JSON + CSS snippet",
+      inputSchema: {
+        type: "object",
+        properties: {
+          sourceId: { type: "string" },
+          outDir: { type: "string", default: ".siteforge" },
+          targetDir: { type: "string" },
+        },
+        required: ["sourceId"],
+      },
+    },
+    {
+      name: "write_spec_stub",
+      description: "Write markdown section spec stub from section JSON",
+      inputSchema: {
+        type: "object",
+        properties: {
+          sourceId: { type: "string" },
+          sectionId: { type: "string" },
+          outDir: { type: "string", default: ".siteforge" },
+          targetPath: { type: "string" },
+          componentName: { type: "string" },
+        },
+        required: ["sourceId", "sectionId"],
+      },
+    },
   ],
 }));
 
@@ -234,8 +340,35 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         saveRawHtml: args.saveRawHtml !== false,
         lazyScroll: args.lazyScroll !== false,
         screenshots: args.screenshots !== false,
+        allowLocalhost: args.allowLocalhost !== false,
+        ssrfGuard: args.ssrfGuard !== false,
       });
       return textResult(result);
+    }
+
+    if (name === "extract_page_phased") {
+      const url = String(args.url ?? "");
+      if (!isHttpUrl(url)) {
+        return textResult(
+          { ok: false, code: "INVALID_URL", message: "url must be http(s)" },
+          true,
+        );
+      }
+      return textResult(
+        await extractPagePhased({
+          url,
+          outDir,
+          waitMs: typeof args.waitMs === "number" ? args.waitMs : 2000,
+          timeoutMs:
+            typeof args.timeoutMs === "number" ? args.timeoutMs : 60_000,
+        }),
+      );
+    }
+
+    if (name === "get_extraction_status") {
+      return textResult(
+        await getExtractionStatus(outDir, String(args.jobId ?? "")),
+      );
     }
 
     if (name === "list_sources") {
@@ -264,7 +397,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         String(args.sourceId ?? ""),
         String(args.sectionId ?? ""),
       );
-      // Truncate huge roots in MCP response — path is on section
       const estimated = JSON.stringify(section).length;
       if (estimated > 80_000) {
         return textResult({
@@ -348,9 +480,71 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         a: String(args.a ?? ""),
         b: String(args.b ?? ""),
         outDir: args.outDir ? String(args.outDir) : undefined,
-        threshold: typeof args.threshold === "number" ? args.threshold : undefined,
+        threshold:
+          typeof args.threshold === "number" ? args.threshold : undefined,
       });
       return textResult(result);
+    }
+
+    if (name === "screenshot_page") {
+      return textResult(
+        await screenshotPage({
+          url: args.url ? String(args.url) : undefined,
+          sourceId: args.sourceId ? String(args.sourceId) : undefined,
+          outDir,
+          fullPage: args.fullPage !== false,
+          waitMs: typeof args.waitMs === "number" ? args.waitMs : undefined,
+        }),
+      );
+    }
+
+    if (name === "capture_theme") {
+      return textResult(
+        await captureTheme({
+          url: String(args.url ?? ""),
+          outDir,
+          sourceId: args.sourceId ? String(args.sourceId) : undefined,
+          waitMs: typeof args.waitMs === "number" ? args.waitMs : undefined,
+        }),
+      );
+    }
+
+    if (name === "capture_interaction") {
+      const kind = String(args.kind ?? "hover") as "hover" | "focus" | "active";
+      return textResult(
+        await captureInteraction({
+          url: String(args.url ?? ""),
+          selector: String(args.selector ?? ""),
+          kind,
+          outDir,
+          sourceId: args.sourceId ? String(args.sourceId) : undefined,
+          waitMs: typeof args.waitMs === "number" ? args.waitMs : undefined,
+        }),
+      );
+    }
+
+    if (name === "export_design_tokens") {
+      return textResult(
+        await exportDesignTokens(
+          outDir,
+          String(args.sourceId ?? ""),
+          args.targetDir ? String(args.targetDir) : undefined,
+        ),
+      );
+    }
+
+    if (name === "write_spec_stub") {
+      return textResult(
+        await writeSpecStub({
+          outDir,
+          sourceId: String(args.sourceId ?? ""),
+          sectionId: String(args.sectionId ?? ""),
+          targetPath: args.targetPath ? String(args.targetPath) : undefined,
+          componentName: args.componentName
+            ? String(args.componentName)
+            : undefined,
+        }),
+      );
     }
 
     return textResult(

@@ -1,0 +1,17 @@
+{
+  "slug": "app-soudobem",
+  "url": "https://appsoudobem.testecliente.com.br/",
+  "beforeOk": true,
+  "before": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\app-soudobem\\_reference\\before.png",
+  "after": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\app-soudobem\\_reference\\after.png",
+  "diff": {
+    "ok": true,
+    "width": 1440,
+    "height": 900,
+    "diffPixels": 34216,
+    "totalPixels": 1296000,
+    "score": 0.9735987654320988,
+    "diffPath": "D:\\claude_projects\\dev-services\\SiteForge\\examples\\clones\\app-soudobem\\_reference\\diff.png"
+  },
+  "capturedAt": "2026-07-22T19:53:28.858Z"
+}

@@ -5,6 +5,8 @@ import { pipeline } from "node:stream/promises";
 import { Readable } from "node:stream";
 import type { ElementNode, ExtractionResult } from "./schema.js";
 import { SiteForgeException } from "./errors.js";
+import { assertSafeHttpUrl } from "./ssrf.js";
+import { withRetry } from "./retry.js";
 
 export type AssetKind = "image" | "video" | "font" | "stylesheet" | "other";
 
@@ -184,6 +186,10 @@ export interface DownloadAssetsOptions {
   concurrency?: number;
   timeoutMs?: number;
   maxBytes?: number;
+  /** Retry attempts per asset (default 3) */
+  retries?: number;
+  ssrfGuard?: boolean;
+  allowLocalhost?: boolean;
 }
 
 export async function downloadAssets(
@@ -192,74 +198,92 @@ export async function downloadAssets(
   const concurrency = options.concurrency ?? 4;
   const timeoutMs = options.timeoutMs ?? 30_000;
   const maxBytes = options.maxBytes ?? 15 * 1024 * 1024;
+  const retries = options.retries ?? 3;
+  const ssrfGuard = options.ssrfGuard ?? true;
+  const allowLocalhost = options.allowLocalhost ?? true;
 
   await mkdir(options.targetDir, { recursive: true });
 
   const results = await mapPool(options.assets, concurrency, async (asset, index) => {
     const fileName = safeFileName(asset.url, index, asset.kind);
     try {
+      assertSafeHttpUrl(asset.url, { enabled: ssrfGuard, allowLocalhost });
       const dest = resolveSafeTargetPath(options.targetDir, fileName);
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), timeoutMs);
-      try {
-        const res = await fetch(asset.url, {
-          signal: controller.signal,
-          redirect: "follow",
-          headers: {
-            "User-Agent": "SiteForge/0.1 (+https://github.com/ggampp/SiteForge)",
-            Accept:
-              asset.kind === "stylesheet"
-                ? "text/css,*/*;q=0.1"
-                : "*/*",
-          },
-        });
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}`);
-        }
-        const len = Number(res.headers.get("content-length") ?? 0);
-        if (len > maxBytes) {
-          throw new Error(`Content-Length ${len} exceeds maxBytes ${maxBytes}`);
-        }
-        if (!res.body) throw new Error("Empty body");
 
-        // For CSS prefer text write (we may post-process)
-        if (asset.kind === "stylesheet") {
-          const text = await res.text();
-          if (Buffer.byteLength(text) > maxBytes) {
-            throw new Error(`CSS size exceeds maxBytes ${maxBytes}`);
+      const downloaded = await withRetry(
+        async () => {
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), timeoutMs);
+          try {
+            const res = await fetch(asset.url, {
+              signal: controller.signal,
+              redirect: "follow",
+              headers: {
+                "User-Agent":
+                  "SiteForge/0.1 (+https://github.com/ggampp/SiteForge)",
+                Accept:
+                  asset.kind === "stylesheet"
+                    ? "text/css,*/*;q=0.1"
+                    : "*/*",
+              },
+            });
+            if (!res.ok) {
+              throw new Error(`HTTP ${res.status}`);
+            }
+            const len = Number(res.headers.get("content-length") ?? 0);
+            if (len > maxBytes) {
+              throw new Error(
+                `Content-Length ${len} exceeds maxBytes ${maxBytes}`,
+              );
+            }
+            if (!res.body) throw new Error("Empty body");
+
+            if (asset.kind === "stylesheet") {
+              const text = await res.text();
+              if (Buffer.byteLength(text) > maxBytes) {
+                throw new Error(`CSS size exceeds maxBytes ${maxBytes}`);
+              }
+              await writeFile(dest, text, "utf8");
+              return {
+                ok: true as const,
+                url: asset.url,
+                kind: asset.kind,
+                path: dest,
+                bytes: Buffer.byteLength(text),
+              };
+            }
+
+            const nodeStream = Readable.fromWeb(
+              res.body as import("node:stream/web").ReadableStream,
+            );
+            await pipeline(nodeStream, createWriteStream(dest));
+
+            const { size } = await import("node:fs/promises").then((fs) =>
+              fs.stat(dest),
+            );
+            if (size > maxBytes) {
+              await import("node:fs/promises").then((fs) =>
+                fs.unlink(dest).catch(() => undefined),
+              );
+              throw new Error(
+                `Downloaded size ${size} exceeds maxBytes ${maxBytes}`,
+              );
+            }
+            return {
+              ok: true as const,
+              url: asset.url,
+              kind: asset.kind,
+              path: dest,
+              bytes: size,
+            };
+          } finally {
+            clearTimeout(timer);
           }
-          await writeFile(dest, text, "utf8");
-          return {
-            ok: true as const,
-            url: asset.url,
-            kind: asset.kind,
-            path: dest,
-            bytes: Buffer.byteLength(text),
-          };
-        }
+        },
+        { attempts: retries, baseDelayMs: 200 },
+      );
 
-        const nodeStream = Readable.fromWeb(
-          res.body as import("node:stream/web").ReadableStream,
-        );
-        await pipeline(nodeStream, createWriteStream(dest));
-
-        const { size } = await import("node:fs/promises").then((fs) =>
-          fs.stat(dest),
-        );
-        if (size > maxBytes) {
-          await import("node:fs/promises").then((fs) => fs.unlink(dest).catch(() => undefined));
-          throw new Error(`Downloaded size ${size} exceeds maxBytes ${maxBytes}`);
-        }
-        return {
-          ok: true as const,
-          url: asset.url,
-          kind: asset.kind,
-          path: dest,
-          bytes: size,
-        };
-      } finally {
-        clearTimeout(timer);
-      }
+      return downloaded;
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       return {

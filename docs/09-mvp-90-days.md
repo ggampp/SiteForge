@@ -74,22 +74,22 @@ Se atrasar: cortar **template polish** e **multi-host sync** (manter só Claude+
 
 ## Critérios de aceite MVP (checklist final)
 
-- [ ] `siteforge extract https://example.com` → sourceId  
-- [ ] `list_sections` retorna N sections com rects  
-- [ ] `download_assets` popula diretório  
-- [ ] MCP tools visíveis no host agent  
-- [ ] Skill instruções usam tools por nome  
-- [ ] Clone parcial de 1 landing real documentado  
-- [ ] `npm run build` no template pós-clone (mesmo que incompleto)  
-- [ ] Nenhuma credencial no repo  
-- [ ] Disclaimer legal presente  
+- [x] `siteforge extract https://example.com` → sourceId
+- [x] `list_sections` retorna N sections com rects
+- [x] `download_assets` popula diretório
+- [x] MCP tools visíveis no host agent (`pnpm verify:mcp` + docs/verification-mcp.md)
+- [x] Skill instruções usam tools por nome
+- [x] Clone parcial de 1 landing real documentado
+- [x] `npm run build` no template pós-clone (mesmo que incompleto)
+- [x] Nenhuma credencial no repo
+- [x] Disclaimer legal presente
 
 ## Anti-goals dos 90 dias
 
-- Pixel 100% em sites WebGL  
-- Healing loop  
-- UI web  
-- Public npm viral marketing  
+- Pixel 100% em sites WebGL
+- Healing loop
+- UI web
+- Public npm viral marketing
 
 ## Depois do dia 90
 

@@ -18,7 +18,12 @@
     "clean": "pnpm -r run clean",
     "examples:serve": "node examples/scripts/serve-clones.mjs",
     "examples:sync-gallery": "node examples/scripts/sync-clones-to-gallery.mjs",
-    "skill:sync": "node packages/skill/scripts/sync-skills.mjs"
+    "skill:sync": "node packages/skill/scripts/sync-skills.mjs",
+    "e2e": "node scripts/e2e-smoke.mjs",
+    "verify:mcp": "node scripts/verify-mcp.mjs",
+    "bench": "node benchmarks/run.mjs",
+    "bench:smoke": "node benchmarks/run.mjs --limit 2",
+    "case:refs": "node scripts/capture-case-references.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.15.30",

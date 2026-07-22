@@ -9,6 +9,8 @@ dist/
 
 # Runtime / local extract store
 .siteforge/
+.siteforge-verify/
+.siteforge-benchmarks/
 *.log
 
 # Env / secrets

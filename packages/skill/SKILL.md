@@ -30,19 +30,25 @@ Use only on sites you own or have permission to analyze. Not for phishing, brand
 |------|-----|
 | `doctor` | Environment check |
 | `extract_page` | Extract URL → `sourceId` |
+| `extract_page_phased` / `get_extraction_status` | Async extract + poll |
 | `list_sources` | List local sources |
 | `get_page_metadata` | Title, viewport, stats |
 | `list_sections` / `chunk_source` | Three-principles sections |
 | `get_section` | Section subtree + text + images |
 | `query_source` | Dotted path on extraction JSON |
 | `discover_assets` / `download_assets` | Asset inventory + download |
-| CLI `siteforge rebuild` | Static HTML rebuild into a folder |
-| CLI `siteforge diff` | Visual pixelmatch of two PNGs |
+| `screenshot_page` | Viewport/full PNG |
+| `capture_theme` | Light/dark theme + CSS vars |
+| `capture_interaction` | Hover/focus/active style diff |
+| `export_design_tokens` | Colors/fonts → CSS snippet |
+| `write_spec_stub` | Markdown section spec from section JSON |
+| `rebuild_source` | Static HTML rebuild into a folder |
+| `visual_diff` | Pixelmatch of two PNGs |
 
 ## Pipeline phases
 
 ### 0 — Pre-flight
-- `doctor`
+- `doctor` (required — fails closed if Chromium missing)
 - Confirm outDir (default `.siteforge`)
 - Create working dirs: `docs/research/`, `public/images/` if using the Next template
 
@@ -50,14 +56,15 @@ Use only on sites you own or have permission to analyze. Not for phishing, brand
 - `extract_page` with full screenshots + raw HTML
 - Record `sourceId`, title, stats, screenshot paths
 - `list_sections` (auto-chunks if needed)
+- Optional: `capture_theme`, `screenshot_page`
 
 ### 2 — Foundation
 - `download_assets` into `public/images` or rebuild `assets/`
-- Note fonts, colors from section styles / `query_source`
+- `export_design_tokens` into `globals.css` / tokens file
 - Scaffold template: `templates/next-shadcn` or existing app
 
 ### 3 — Specs
-For each major section write `docs/research/<sectionId>.spec.md`:
+For each major section prefer `write_spec_stub`, then refine `docs/research/<sectionId>.spec.md`:
 
 ```markdown
 # <ComponentName> Specification
@@ -77,6 +84,8 @@ For each major section write `docs/research/<sectionId>.spec.md`:
 ## Open questions / gaps
 ```
 
+Use `capture_interaction` for hover/focus notes in States & Behaviors.
+
 ### 4 — Build
 - Implement one section per component file
 - Prefer real text/assets from extract
@@ -88,7 +97,7 @@ For each major section write `docs/research/<sectionId>.spec.md`:
 
 ### 6 — QA
 - Capture local screenshot
-- `siteforge diff` vs original viewport/full
+- `visual_diff` / `siteforge diff` vs original viewport/full
 - List known gaps (WebGL, auth, live APIs)
 
 ## Guiding principles
@@ -117,6 +126,10 @@ siteforge extract https://example.com
 siteforge chunk <sourceId>
 siteforge sections <sourceId>
 siteforge download <sourceId>
+siteforge tokens <sourceId>
+siteforge spec <sourceId> <sectionId> -t docs/research/section.spec.md
+siteforge theme https://example.com
+siteforge interact https://example.com "a.btn" --kind hover
 siteforge rebuild <sourceId> --slug example --target examples/example
 siteforge diff a.png b.png -o .siteforge/diff-out
 ```
@@ -133,7 +146,8 @@ siteforge diff a.png b.png -o .siteforge/diff-out
 Run from monorepo:
 
 ```bash
-node packages/skill/scripts/sync-skills.mjs
+pnpm skill:sync
+# or: node packages/skill/scripts/sync-skills.mjs
 ```
 
-Copies `SKILL.md` into Claude Code / Cursor / Codex skill paths when present.
+Copies `SKILL.md` into Claude / Cursor / Codex / Grok skill paths (best-effort).
